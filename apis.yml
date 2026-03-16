@@ -5,11 +5,18 @@ apis:
   - aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis
     name: The Bureau of Economic Analysis
     tags:
-      - API
-    humanURL: ' https://apps.bea.gov/API/signup/'
+      - Federal Government
+      - Economics
+      - Statistics
+    humanURL: https://www.bea.gov/resources/for-developers
+    baseURL: https://apps.bea.gov/api/data
     properties:
-      - url: ' https://apps.bea.gov/API/signup/'
+      - url: https://www.bea.gov/resources/for-developers
         type: Documentation
+      - url: https://apps.bea.gov/api/signup/
+        type: Sign Up
+      - url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
+        type: Getting Started
     description: >-
       The data API provides programmatic access to BEA published economic
       statistics using industry-standard methods and procedures. BEAs data API
@@ -22,7 +29,7 @@ type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-11-14'
-modified: '2025-01-03'
+modified: '2026-03-16'
 position: Consuming
 description: >-
   The Bureau of Economic Analysis (BEA) is an agency within the U.S. Department
@@ -34,7 +41,16 @@ description: >-
   the state of the economy. Additionally, the BEA plays a key role in monitoring
   and reporting on trends in the economy, contributing to a better understanding
   of economic growth, productivity, and competitiveness.
+common:
+  - type: Website
+    url: https://www.bea.gov/
+  - type: Documentation
+    url: https://www.bea.gov/resources/for-developers
+  - type: Sign Up
+    url: https://apps.bea.gov/api/signup/
+  - type: GitHub Organization
+    url: https://github.com/us-bea
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
