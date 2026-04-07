@@ -32,15 +32,12 @@ created: '2024-11-14'
 modified: '2026-03-16'
 position: Consuming
 description: >-
-  The Bureau of Economic Analysis (BEA) is an agency within the U.S. Department
-  of Commerce that provides economic data to policymakers, businesses, and the
-  general public. The BEA collects and analyzes a wide range of economic
-  indicators, including gross domestic product (GDP), personal income, and trade
-  data. Through its reports and analysis, the BEA helps inform decision-making
-  at all levels of government and helps businesses and individuals understand
-  the state of the economy. Additionally, the BEA plays a key role in monitoring
-  and reporting on trends in the economy, contributing to a better understanding
-  of economic growth, productivity, and competitiveness.
+  The Bureau of Economic Analysis (BEA) is an agency within the U.S. Department of
+  Commerce that provides economic data to policymakers, businesses, and the general
+  public. The BEA collects and analyzes a wide range of economic indicators, including
+  gross domestic product (GDP), personal income, and trade data. Through its reports
+  and analysis, the BEA helps inform decision-making at all levels of government and
+  helps businesses and individuals understand the state of the economy.
 common:
   - type: Website
     url: https://www.bea.gov/
