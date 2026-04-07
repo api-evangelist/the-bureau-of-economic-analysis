@@ -5,8 +5,8 @@ apis:
   - aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis
     name: The Bureau of Economic Analysis
     tags:
-      - Federal Government
       - Economics
+      - Federal Government
       - Statistics
     humanURL: https://www.bea.gov/resources/for-developers
     baseURL: https://apps.bea.gov/api/data
