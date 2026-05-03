@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/the-bureau-of-economic-analysis/main/json-schema/the-bureau-of-economic-analysis-data-point-schema.json",
+  "title": "BEA Data Point",
+  "description": "A single economic data point returned by the BEA Data API.",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "Name of the BEA table this data point belongs to."
+    },
+    "SeriesCode": {
+      "type": "string",
+      "description": "Unique series code identifying the specific economic series."
+    },
+    "LineNumber": {
+      "type": "string",
+      "description": "Line number in the source BEA table."
+    },
+    "LineDescription": {
+      "type": "string",
+      "description": "Human-readable description of the line item."
+    },
+    "TimePeriod": {
+      "type": "string",
+      "description": "Time period for the data point (e.g., 2023, 2023Q1, 2023M01).",
+      "examples": ["2023", "2023Q1", "2023Q2", "2023M01"]
+    },
+    "CL_UNIT": {
+      "type": "string",
+      "description": "Classification unit for the data value."
+    },
+    "MULT": {
+      "type": "string",
+      "description": "Multiplier applied to the data value (6 = millions of dollars).",
+      "examples": ["6", "0", "-1"]
+    },
+    "DataValue": {
+      "type": "string",
+      "description": "The actual economic data value as a string. May include commas as thousands separators."
+    },
+    "NoteRef": {
+      "type": "string",
+      "description": "Reference key to an associated note, if applicable."
+    }
+  },
+  "required": ["TableName", "SeriesCode", "TimePeriod", "DataValue"]
+}

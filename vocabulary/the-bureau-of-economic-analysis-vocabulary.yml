@@ -1,0 +1,171 @@
+vocabulary:
+  title: Bureau of Economic Analysis Vocabulary
+  description: >-
+    Vocabulary and taxonomy for the Bureau of Economic Analysis (BEA) API and economic
+    data concepts. Covers national accounts, regional economics, international transactions,
+    and industry-level economic statistics.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  terms:
+    - term: GDP
+      label: Gross Domestic Product
+      definition: >-
+        The total monetary or market value of all the finished goods and services
+        produced within a country's borders in a specific time period. The
+        broadest measure of economic output and activity.
+      abbreviation: GDP
+      domain: National Accounts
+      relatedTerms:
+        - Real GDP
+        - Nominal GDP
+        - GDPbyIndustry
+
+    - term: NIPA
+      label: National Income and Product Accounts
+      definition: >-
+        A set of economic statistics compiled by the BEA that measure U.S. economic
+        activity by tracking the production and use of goods and services and income
+        earned and used in production. Includes GDP, GNP, national income, personal
+        income, and saving.
+      abbreviation: NIPA
+      domain: National Accounts
+
+    - term: DataValue
+      label: Data Value
+      definition: >-
+        The actual numeric value for an economic measurement at a specific time period,
+        geographic level, or industry. May require application of the MULT multiplier
+        to convert to final units.
+      domain: API
+
+    - term: TimePeriod
+      label: Time Period
+      definition: >-
+        The temporal identifier for a data observation. Annual periods are expressed
+        as four-digit years (e.g., 2024), quarterly periods as YYYYQn (e.g., 2024Q1),
+        and monthly periods as YYYYMnn (e.g., 2024M01).
+      domain: API
+
+    - term: GeoFips
+      label: Geographic FIPS Code
+      definition: >-
+        Federal Information Processing Standards geographic identifier for U.S.
+        states, counties, and metropolitan statistical areas. Used in the Regional
+        dataset. Use 'STATE' for all states or '00000' for the U.S. total.
+      domain: Regional
+
+    - term: SeriesCode
+      label: Series Code
+      definition: >-
+        A unique alphanumeric identifier for a specific economic time series
+        within a BEA dataset. Maps to a particular measure, industry, or geographic
+        combination.
+      domain: API
+
+    - term: TableName
+      label: Table Name
+      definition: >-
+        The identifier for a specific BEA statistical table within a dataset.
+        For NIPA tables, these follow a pattern like T10101 (Table 1.1.1).
+        For Regional tables, codes like SQGDP1 indicate specific releases.
+      domain: API
+
+    - term: Frequency
+      label: Data Frequency
+      definition: >-
+        The temporal resolution of data observations. BEA supports Annual (A),
+        Quarterly (Q), Monthly (M), and quarterly seasonally adjusted at annual
+        rates (QSA).
+      domain: API
+      values:
+        - A: Annual
+        - Q: Quarterly
+        - M: Monthly
+        - QSA: Quarterly Seasonally Adjusted Annual Rate
+
+    - term: ITA
+      label: International Transactions Accounts
+      definition: >-
+        BEA accounts that measure international flows of goods, services, primary
+        income, and secondary income between U.S. residents and foreign residents.
+        Includes the current account, capital account, and financial account.
+      abbreviation: ITA
+      domain: International
+
+    - term: IIP
+      label: International Investment Position
+      definition: >-
+        The year-end value of U.S. assets abroad and foreign assets in the United
+        States. Measures the net position of U.S. residents vis-a-vis foreign
+        residents and provides context for understanding balance of payments flows.
+      abbreviation: IIP
+      domain: International
+
+    - term: MNE
+      label: Multinational Enterprise
+      definition: >-
+        A firm that owns or controls productive operations in more than one country.
+        The BEA collects annual and benchmark data on the financial and operating
+        characteristics of U.S. multinational corporations and their foreign affiliates,
+        as well as foreign multinational corporations operating in the U.S.
+      abbreviation: MNE
+      domain: International
+
+    - term: FixedAssets
+      label: Fixed Assets
+      definition: >-
+        Tangible and intangible assets used in production for more than one year.
+        BEA Fixed Assets accounts provide detailed data on the current-cost net
+        stock, investment, and depreciation of private and government fixed assets.
+      domain: National Accounts
+
+    - term: InputOutput
+      label: Input-Output Tables
+      definition: >-
+        Economic tables that show how the output of one industry is used as input
+        by other industries and by final users. BEA produces supply and use tables
+        and symmetric input-output tables showing the interdependencies of industries.
+      domain: Industry
+
+    - term: RegionalGDP
+      label: Regional GDP
+      definition: >-
+        Gross domestic product measured at the state, metropolitan statistical area
+        (MSA), or county level. Allows comparison of economic performance and
+        structure across geographic areas within the United States.
+      domain: Regional
+
+    - term: PersonalIncome
+      label: Personal Income
+      definition: >-
+        The income received by, or on behalf of, all persons from all sources.
+        Measured before the deduction of personal taxes. A key BEA regional
+        statistic available at state, county, and metropolitan area levels.
+      domain: Regional
+
+    - term: MULT
+      label: Multiplier
+      definition: >-
+        A numeric code indicating the scale of the data value. A MULT of 6 means
+        the DataValue should be interpreted as millions; a MULT of 0 means the
+        value is as reported; a MULT of -1 means billions.
+      domain: API
+
+    - term: UserID
+      label: User ID (API Key)
+      definition: >-
+        A unique 36-character UUID issued by the BEA upon free registration.
+        Required for all API requests. Obtained at https://apps.bea.gov/api/signup/
+      domain: API
+
+    - term: DirectionOfInvestment
+      label: Direction of Investment
+      definition: >-
+        In MNE data, indicates whether data describes outward investment (U.S.
+        parent companies investing abroad) or inward investment (foreign parent
+        companies investing in the U.S.).
+      domain: International
+      values:
+        - outward: U.S. multinational parent companies and their foreign affiliates
+        - inward: Foreign multinational parent companies and their U.S. affiliates

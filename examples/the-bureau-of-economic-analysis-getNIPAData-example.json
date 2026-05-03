@@ -1,0 +1,89 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://apps.bea.gov/api/data/?UserID=YOUR_API_KEY&method=GetData&DatasetName=NIPA&TableName=T10101&Frequency=Q&Year=2024&ResultFormat=JSON",
+    "parameters": {
+      "UserID": "YOUR_API_KEY",
+      "method": "GetData",
+      "DatasetName": "NIPA",
+      "TableName": "T10101",
+      "Frequency": "Q",
+      "Year": "2024",
+      "ResultFormat": "JSON"
+    }
+  },
+  "response": {
+    "BEAAPI": {
+      "Request": {
+        "RequestParam": [
+          { "ParameterName": "UserID", "ParameterValue": "YOUR_API_KEY" },
+          { "ParameterName": "METHOD", "ParameterValue": "GETDATA" },
+          { "ParameterName": "DATASETNAME", "ParameterValue": "NIPA" },
+          { "ParameterName": "TableName", "ParameterValue": "T10101" },
+          { "ParameterName": "Frequency", "ParameterValue": "Q" },
+          { "ParameterName": "Year", "ParameterValue": "2024" },
+          { "ParameterName": "RESULTFORMAT", "ParameterValue": "JSON" }
+        ]
+      },
+      "Results": {
+        "Statistic": "NIPA Table",
+        "UnitOfMeasure": "Billions of dollars",
+        "PublicTable": "Table 1.1.1. Percent Change From Preceding Period in Real Gross Domestic Product",
+        "UTCProductionTime": "2025-01-30T10:00:00.000",
+        "NoteRef": "T10101",
+        "Dimensions": [
+          { "Name": "TableName", "DataType": "string", "IsValue": "0" },
+          { "Name": "SeriesCode", "DataType": "string", "IsValue": "0" },
+          { "Name": "LineNumber", "DataType": "numeric", "IsValue": "0" },
+          { "Name": "LineDescription", "DataType": "string", "IsValue": "0" },
+          { "Name": "TimePeriod", "DataType": "string", "IsValue": "0" },
+          { "Name": "CL_UNIT", "DataType": "string", "IsValue": "0" },
+          { "Name": "MULT", "DataType": "numeric", "IsValue": "0" },
+          { "Name": "DataValue", "DataType": "numeric", "IsValue": "1" },
+          { "Name": "NoteRef", "DataType": "string", "IsValue": "0" }
+        ],
+        "Data": [
+          {
+            "TableName": "T10101",
+            "SeriesCode": "A191RL",
+            "LineNumber": "1",
+            "LineDescription": "Gross domestic product",
+            "TimePeriod": "2024Q1",
+            "CL_UNIT": "Percent change",
+            "MULT": "0",
+            "DataValue": "1.4",
+            "NoteRef": ""
+          },
+          {
+            "TableName": "T10101",
+            "SeriesCode": "A191RL",
+            "LineNumber": "1",
+            "LineDescription": "Gross domestic product",
+            "TimePeriod": "2024Q2",
+            "CL_UNIT": "Percent change",
+            "MULT": "0",
+            "DataValue": "3.0",
+            "NoteRef": ""
+          },
+          {
+            "TableName": "T10101",
+            "SeriesCode": "A191RL",
+            "LineNumber": "1",
+            "LineDescription": "Gross domestic product",
+            "TimePeriod": "2024Q3",
+            "CL_UNIT": "Percent change",
+            "MULT": "0",
+            "DataValue": "2.8",
+            "NoteRef": ""
+          }
+        ],
+        "Notes": [
+          {
+            "NoteRef": "T10101",
+            "NoteText": "Quarterly estimates are seasonally adjusted at annual rates."
+          }
+        ]
+      }
+    }
+  }
+}

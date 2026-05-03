@@ -1,0 +1,77 @@
+{
+  "title": "BEA API Data Response Structure",
+  "description": "The top-level structure of a successful BEA API data response, wrapping requests and results.",
+  "type": "object",
+  "structure": {
+    "BEAAPI": {
+      "type": "object",
+      "description": "Root envelope for all BEA API responses.",
+      "children": {
+        "Request": {
+          "type": "object",
+          "description": "Echo of the request parameters sent to the API.",
+          "children": {
+            "RequestParam": {
+              "type": "array",
+              "description": "Array of name-value pairs from the original request.",
+              "items": {
+                "ParameterName": { "type": "string" },
+                "ParameterValue": { "type": "string" }
+              }
+            }
+          }
+        },
+        "Results": {
+          "type": "object",
+          "description": "Container for the data results.",
+          "children": {
+            "Statistic": {
+              "type": "string",
+              "description": "Name of the returned economic statistic."
+            },
+            "UnitOfMeasure": {
+              "type": "string",
+              "description": "Unit of measure for data values (e.g., Millions of dollars)."
+            },
+            "PublicTable": {
+              "type": "string",
+              "description": "Public table name."
+            },
+            "Dimensions": {
+              "type": "array",
+              "description": "Metadata describing the dimensions of the returned data.",
+              "items": {
+                "Name": { "type": "string" },
+                "DataType": { "type": "string" },
+                "IsValue": { "type": "string", "enum": ["0", "1"] }
+              }
+            },
+            "Data": {
+              "type": "array",
+              "description": "Array of individual data points.",
+              "items": {
+                "TableName": { "type": "string" },
+                "SeriesCode": { "type": "string" },
+                "LineNumber": { "type": "string" },
+                "LineDescription": { "type": "string" },
+                "TimePeriod": { "type": "string" },
+                "CL_UNIT": { "type": "string" },
+                "MULT": { "type": "string" },
+                "DataValue": { "type": "string" },
+                "NoteRef": { "type": "string" }
+              }
+            },
+            "Notes": {
+              "type": "array",
+              "description": "Any footnotes associated with the data.",
+              "items": {
+                "NoteRef": { "type": "string" },
+                "NoteText": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "bea": "https://apps.bea.gov/api/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+
+    "BEAAPI": "bea:BEAAPI",
+    "DatasetName": "bea:DatasetName",
+    "DatasetDescription": "dcterms:description",
+    "DataValue": "bea:DataValue",
+    "TimePeriod": {
+      "@id": "dcterms:temporal",
+      "@type": "xsd:string"
+    },
+    "SeriesCode": "bea:SeriesCode",
+    "LineNumber": "bea:LineNumber",
+    "LineDescription": "dcterms:description",
+    "TableName": "bea:TableName",
+    "UnitOfMeasure": {
+      "@id": "schema:unitText"
+    },
+    "Statistic": {
+      "@id": "schema:StatisticalVariable"
+    },
+    "GeoFips": {
+      "@id": "schema:addressRegion"
+    },
+    "GeoName": {
+      "@id": "schema:name"
+    },
+    "Dataset": {
+      "@id": "schema:Dataset",
+      "@type": "schema:Dataset"
+    },
+    "GovernmentOrganization": {
+      "@id": "schema:GovernmentOrganization"
+    },
+    "BEA": {
+      "@id": "schema:GovernmentOrganization",
+      "schema:name": "Bureau of Economic Analysis",
+      "schema:url": "https://www.bea.gov"
+    },
+
+    "datasets": {
+      "@id": "schema:dataset",
+      "@container": "@set"
+    },
+    "parameters": {
+      "@id": "bea:parameters",
+      "@container": "@set"
+    },
+    "data": {
+      "@id": "schema:DataDownload",
+      "@container": "@set"
+    },
+    "notes": {
+      "@id": "schema:description",
+      "@container": "@set"
+    },
+
+    "NIPA": {
+      "@id": "bea:NIPA",
+      "skos:prefLabel": "National Income and Product Accounts"
+    },
+    "GDPbyIndustry": {
+      "@id": "bea:GDPbyIndustry",
+      "skos:prefLabel": "GDP by Industry"
+    },
+    "Regional": {
+      "@id": "bea:Regional",
+      "skos:prefLabel": "Regional Economic Data"
+    },
+    "ITA": {
+      "@id": "bea:ITA",
+      "skos:prefLabel": "International Transactions Accounts"
+    },
+    "IIP": {
+      "@id": "bea:IIP",
+      "skos:prefLabel": "International Investment Position"
+    },
+    "MNE": {
+      "@id": "bea:MNE",
+      "skos:prefLabel": "Multinational Enterprises"
+    },
+    "FixedAssets": {
+      "@id": "bea:FixedAssets",
+      "skos:prefLabel": "Fixed Assets"
+    },
+    "InputOutput": {
+      "@id": "bea:InputOutput",
+      "skos:prefLabel": "Input-Output Tables"
+    }
+  }
+}

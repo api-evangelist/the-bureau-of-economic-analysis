@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://apps.bea.gov/api/data/?UserID=YOUR_API_KEY&method=GetDatasetList&ResultFormat=JSON",
+    "parameters": {
+      "UserID": "YOUR_API_KEY",
+      "method": "GetDatasetList",
+      "ResultFormat": "JSON"
+    }
+  },
+  "response": {
+    "BEAAPI": {
+      "Request": {
+        "RequestParam": [
+          { "ParameterName": "UserID", "ParameterValue": "YOUR_API_KEY" },
+          { "ParameterName": "METHOD", "ParameterValue": "GETDATASETLIST" },
+          { "ParameterName": "RESULTFORMAT", "ParameterValue": "JSON" }
+        ]
+      },
+      "Results": {
+        "Dataset": [
+          { "DatasetName": "NIPA", "DatasetDescription": "Standard NIPA tables" },
+          { "DatasetName": "NIUnderlyingDetail", "DatasetDescription": "NI underlying detail tables" },
+          { "DatasetName": "MNE", "DatasetDescription": "Multinational enterprises" },
+          { "DatasetName": "FixedAssets", "DatasetDescription": "Standard fixed assets tables" },
+          { "DatasetName": "ITA", "DatasetDescription": "International transactions accounts" },
+          { "DatasetName": "IIP", "DatasetDescription": "International investment position" },
+          { "DatasetName": "InputOutput", "DatasetDescription": "Input-output data" },
+          { "DatasetName": "IntlServTrade", "DatasetDescription": "International services trade" },
+          { "DatasetName": "IntlServSTA", "DatasetDescription": "International services supplied through affiliates" },
+          { "DatasetName": "GDPbyIndustry", "DatasetDescription": "GDP by industry" },
+          { "DatasetName": "Regional", "DatasetDescription": "Regional data" },
+          { "DatasetName": "UnderlyingGDPbyIndustry", "DatasetDescription": "Underlying GDP by industry" },
+          { "DatasetName": "APIDatasetMetaData", "DatasetDescription": "Metadata about API datasets" }
+        ]
+      }
+    }
+  }
+}

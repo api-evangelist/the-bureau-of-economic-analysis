@@ -1,0 +1,80 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://apps.bea.gov/api/data/?UserID=YOUR_API_KEY&method=GetData&DatasetName=Regional&TableName=SQGDP1&LineCode=1&GeoFips=STATE&Year=2023,2024&ResultFormat=JSON",
+    "parameters": {
+      "UserID": "YOUR_API_KEY",
+      "method": "GetData",
+      "DatasetName": "Regional",
+      "TableName": "SQGDP1",
+      "LineCode": 1,
+      "GeoFips": "STATE",
+      "Year": "2023,2024",
+      "ResultFormat": "JSON"
+    }
+  },
+  "response": {
+    "BEAAPI": {
+      "Request": {
+        "RequestParam": [
+          { "ParameterName": "UserID", "ParameterValue": "YOUR_API_KEY" },
+          { "ParameterName": "METHOD", "ParameterValue": "GETDATA" },
+          { "ParameterName": "DATASETNAME", "ParameterValue": "Regional" },
+          { "ParameterName": "TableName", "ParameterValue": "SQGDP1" },
+          { "ParameterName": "LineCode", "ParameterValue": "1" },
+          { "ParameterName": "GeoFips", "ParameterValue": "STATE" },
+          { "ParameterName": "Year", "ParameterValue": "2023,2024" },
+          { "ParameterName": "RESULTFORMAT", "ParameterValue": "JSON" }
+        ]
+      },
+      "Results": {
+        "Statistic": "SQGDP1-Real GDP by state",
+        "UnitOfMeasure": "Millions of chained 2017 dollars",
+        "PublicTable": "SQGDP1 Real GDP by state",
+        "UTCProductionTime": "2025-03-27T10:00:00.000",
+        "Dimensions": [
+          { "Name": "TableName", "DataType": "string", "IsValue": "0" },
+          { "Name": "GeoFips", "DataType": "string", "IsValue": "0" },
+          { "Name": "GeoName", "DataType": "string", "IsValue": "0" },
+          { "Name": "LineCode", "DataType": "numeric", "IsValue": "0" },
+          { "Name": "IndustryId", "DataType": "numeric", "IsValue": "0" },
+          { "Name": "IndustryClassification", "DataType": "string", "IsValue": "0" },
+          { "Name": "Description", "DataType": "string", "IsValue": "0" },
+          { "Name": "TimePeriod", "DataType": "string", "IsValue": "0" },
+          { "Name": "CL_UNIT", "DataType": "string", "IsValue": "0" },
+          { "Name": "MULT", "DataType": "numeric", "IsValue": "0" },
+          { "Name": "DataValue", "DataType": "numeric", "IsValue": "1" },
+          { "Name": "NoteRef", "DataType": "string", "IsValue": "0" }
+        ],
+        "Data": [
+          {
+            "GeoFips": "06000",
+            "GeoName": "California",
+            "LineCode": "1",
+            "IndustryId": "1",
+            "IndustryClassification": "...",
+            "Description": "All industry total",
+            "TimePeriod": "2024Q1",
+            "CL_UNIT": "Millions of chained 2017 dollars",
+            "MULT": "6",
+            "DataValue": "3,421,517",
+            "NoteRef": ""
+          },
+          {
+            "GeoFips": "48000",
+            "GeoName": "Texas",
+            "LineCode": "1",
+            "IndustryId": "1",
+            "IndustryClassification": "...",
+            "Description": "All industry total",
+            "TimePeriod": "2024Q1",
+            "CL_UNIT": "Millions of chained 2017 dollars",
+            "MULT": "6",
+            "DataValue": "2,192,845",
+            "NoteRef": ""
+          }
+        ]
+      }
+    }
+  }
+}

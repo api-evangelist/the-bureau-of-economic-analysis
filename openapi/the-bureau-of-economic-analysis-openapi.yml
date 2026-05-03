@@ -1,0 +1,906 @@
+openapi: 3.0.3
+info:
+  title: Bureau of Economic Analysis API
+  description: >-
+    The Bureau of Economic Analysis (BEA) Data API provides programmatic access
+    to BEA published economic statistics using industry-standard methods and
+    procedures. The API includes methods for retrieving a subset of statistical
+    data and the metadata that describes it. Available datasets include National
+    Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed
+    Assets, International Transactions Accounts (ITA), International Investment
+    Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.
+  version: 1.0.0
+  contact:
+    name: Bureau of Economic Analysis Developer Support
+    url: https://www.bea.gov/resources/for-developers
+  license:
+    name: Public Domain
+    url: https://www.bea.gov/help/faq/245
+servers:
+  - url: https://apps.bea.gov/api/data
+    description: BEA API Production Server
+security:
+  - ApiKeyAuth: []
+paths:
+  /:
+    get:
+      operationId: getDatasetList
+      summary: Get Dataset List
+      description: Returns a list of all available BEA datasets with descriptions.
+      tags:
+        - Metadata
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          description: Your registered BEA API key (36-character UUID).
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          description: API method to invoke.
+          schema:
+            type: string
+            enum:
+              - GetDatasetList
+          example: GetDatasetList
+        - name: ResultFormat
+          in: query
+          required: false
+          description: Format for the response data.
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: List of available BEA datasets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetListResponse'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /parameters:
+    get:
+      operationId: getParameterList
+      summary: Get Parameter List
+      description: Returns a list of the parameters (required and optional) for a particular dataset.
+      tags:
+        - Metadata
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          description: Your registered BEA API key.
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          description: API method to invoke.
+          schema:
+            type: string
+            enum:
+              - GetParameterList
+          example: GetParameterList
+        - name: DatasetName
+          in: query
+          required: true
+          description: Name of the dataset for which to retrieve parameters.
+          schema:
+            type: string
+            enum:
+              - NIPA
+              - NIUnderlyingDetail
+              - MNE
+              - FixedAssets
+              - ITA
+              - IIP
+              - InputOutput
+              - IntlServTrade
+              - IntlServSTA
+              - GDPbyIndustry
+              - Regional
+              - UnderlyingGDPbyIndustry
+              - APIDatasetMetaData
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: List of parameters for the specified dataset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterListResponse'
+  /parameter-values:
+    get:
+      operationId: getParameterValues
+      summary: Get Parameter Values
+      description: Returns a list of valid values for a specified parameter within a dataset.
+      tags:
+        - Metadata
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetParameterValues
+          example: GetParameterValues
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: ParameterName
+          in: query
+          required: true
+          description: Name of the parameter for which to retrieve valid values.
+          schema:
+            type: string
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: Valid values for the specified parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterValuesResponse'
+  /nipa-data:
+    get:
+      operationId: getNIPAData
+      summary: Get NIPA Data
+      description: >-
+        Retrieves data from the National Income and Product Accounts (NIPA)
+        dataset. NIPA tables cover GDP, personal income, consumer spending,
+        corporate profits, and other national economic aggregates.
+      tags:
+        - National Accounts
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - NIPA
+          example: NIPA
+        - name: TableName
+          in: query
+          required: true
+          description: NIPA table name (e.g., T10101 for GDP).
+          schema:
+            type: string
+          example: T10101
+        - name: Frequency
+          in: query
+          required: true
+          description: Data frequency.
+          schema:
+            type: string
+            enum:
+              - A
+              - Q
+              - M
+          example: Q
+        - name: Year
+          in: query
+          required: true
+          description: Year(s) for data retrieval. Use 'X' for all years.
+          schema:
+            type: string
+          example: '2023,2024'
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: NIPA economic data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+  /regional-data:
+    get:
+      operationId: getRegionalData
+      summary: Get Regional Data
+      description: >-
+        Retrieves state and local area economic data from the Regional dataset.
+        Includes GDP by state, personal income, and employment data at the
+        state, metropolitan statistical area (MSA), and county level.
+      tags:
+        - Regional
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - Regional
+          example: Regional
+        - name: TableName
+          in: query
+          required: true
+          description: Regional table code (e.g., SQGDP1 for Quarterly GDP by State).
+          schema:
+            type: string
+          example: SQGDP1
+        - name: LineCode
+          in: query
+          required: true
+          description: Line code within the regional table.
+          schema:
+            type: integer
+          example: 1
+        - name: GeoFips
+          in: query
+          required: true
+          description: Geographic FIPS code. Use 'STATE' for all states, '00000' for US total.
+          schema:
+            type: string
+          example: STATE
+        - name: Year
+          in: query
+          required: true
+          description: Year(s) for data retrieval. Use 'LAST5' for last 5 years.
+          schema:
+            type: string
+          example: '2023,2024'
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: Regional economic data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+  /gdp-by-industry-data:
+    get:
+      operationId: getGDPByIndustryData
+      summary: Get GDP by Industry Data
+      description: >-
+        Retrieves GDP-by-industry data, including value added, gross output,
+        and intermediate inputs by industry sector (NAICS-based).
+      tags:
+        - Industry
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GDPbyIndustry
+          example: GDPbyIndustry
+        - name: TableID
+          in: query
+          required: true
+          description: Table identifier within GDPbyIndustry dataset.
+          schema:
+            type: integer
+          example: 1
+        - name: Frequency
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - A
+              - Q
+          example: A
+        - name: Year
+          in: query
+          required: true
+          schema:
+            type: string
+          example: '2023'
+        - name: Industry
+          in: query
+          required: true
+          description: Industry code. Use 'ALL' for all industries.
+          schema:
+            type: string
+          example: ALL
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: GDP by industry data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+  /ita-data:
+    get:
+      operationId: getITAData
+      summary: Get International Transactions Data
+      description: >-
+        Retrieves data from the International Transactions Accounts (ITA)
+        dataset. Covers U.S. current account, capital account, and financial
+        account transactions with the rest of the world.
+      tags:
+        - International
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ITA
+          example: ITA
+        - name: Indicator
+          in: query
+          required: true
+          description: ITA indicator code (e.g., BalGds for Balance on Goods).
+          schema:
+            type: string
+          example: BalGds
+        - name: AreaOrCountry
+          in: query
+          required: true
+          description: Country or area code. Use 'AllCountries' for all.
+          schema:
+            type: string
+          example: AllCountries
+        - name: Frequency
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - A
+              - QSA
+          example: A
+        - name: Year
+          in: query
+          required: true
+          schema:
+            type: string
+          example: '2023'
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: International transactions data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+  /fixed-assets-data:
+    get:
+      operationId: getFixedAssetsData
+      summary: Get Fixed Assets Data
+      description: >-
+        Retrieves data from the Fixed Assets dataset covering net stock of
+        fixed assets, depreciation, investment, and related measures for
+        private and government fixed assets in the United States.
+      tags:
+        - National Accounts
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - FixedAssets
+          example: FixedAssets
+        - name: TableName
+          in: query
+          required: true
+          description: Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock).
+          schema:
+            type: string
+          example: FAAt101
+        - name: Year
+          in: query
+          required: true
+          schema:
+            type: string
+          example: '2022,2023'
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: Fixed assets data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+  /input-output-data:
+    get:
+      operationId: getInputOutputData
+      summary: Get Input-Output Data
+      description: >-
+        Retrieves data from the Input-Output dataset covering supply and use
+        tables, requirements tables, and make and use tables for the U.S. economy.
+      tags:
+        - Industry
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - InputOutput
+          example: InputOutput
+        - name: TableID
+          in: query
+          required: true
+          description: Input-Output table identifier.
+          schema:
+            type: integer
+          example: 56
+        - name: Year
+          in: query
+          required: true
+          schema:
+            type: string
+          example: '2022'
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: Input-output tables data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+  /mne-data:
+    get:
+      operationId: getMNEData
+      summary: Get Multinational Enterprises Data
+      description: >-
+        Retrieves data on U.S. multinational enterprises (MNEs) and foreign
+        multinational enterprises operating in the United States, including
+        financial and operating data.
+      tags:
+        - International
+      parameters:
+        - name: UserID
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: method
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetData
+          example: GetData
+        - name: DatasetName
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - MNE
+          example: MNE
+        - name: DirectionOfInvestment
+          in: query
+          required: true
+          description: Direction of investment - outward (US parent) or inward (foreign parent).
+          schema:
+            type: string
+            enum:
+              - outward
+              - inward
+          example: outward
+        - name: ClassificationCode
+          in: query
+          required: true
+          description: Industry or country classification code.
+          schema:
+            type: string
+          example: '0'
+        - name: Year
+          in: query
+          required: true
+          schema:
+            type: string
+          example: '2022'
+        - name: SeriesID
+          in: query
+          required: true
+          description: MNE series identifier for the measure requested.
+          schema:
+            type: integer
+          example: 4
+        - name: ResultFormat
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - JSON
+              - XML
+            default: JSON
+      responses:
+        '200':
+          description: Multinational enterprises data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: UserID
+      description: BEA API key obtained by registering at https://apps.bea.gov/api/signup/
+  schemas:
+    DatasetListResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Dataset:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      DatasetName:
+                        type: string
+                        description: Unique name of the dataset.
+                      DatasetDescription:
+                        type: string
+                        description: Human-readable description of the dataset.
+    ParameterListResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Parameter:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ParameterName:
+                        type: string
+                      ParameterDataType:
+                        type: string
+                      ParameterDescription:
+                        type: string
+                      ParameterIsRequired:
+                        type: string
+                        enum:
+                          - '0'
+                          - '1'
+                      ParameterDefaultValue:
+                        type: string
+                      MultipleAcceptedFlag:
+                        type: string
+                        enum:
+                          - '0'
+                          - '1'
+    ParameterValuesResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                ParamValue:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Key:
+                        type: string
+                        description: Valid value key for the parameter.
+                      Desc:
+                        type: string
+                        description: Description of the parameter value.
+    DataResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Statistic:
+                  type: string
+                  description: Name of the statistic returned.
+                UnitOfMeasure:
+                  type: string
+                  description: Unit of measure for the data values.
+                PublicTable:
+                  type: string
+                  description: Name of the public table.
+                UTCProductionTime:
+                  type: string
+                  format: date-time
+                  description: Production timestamp of the data.
+                NoteRef:
+                  type: string
+                  description: Reference to any notes on the data.
+                Dimensions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+                Data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataPoint'
+                Notes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      NoteRef:
+                        type: string
+                      NoteText:
+                        type: string
+    Dimension:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Name of the dimension (e.g., TableName, Frequency, Year, Line).
+        DataType:
+          type: string
+          description: Data type of the dimension values.
+        IsValue:
+          type: string
+          enum:
+            - '0'
+            - '1'
+          description: Indicates if this dimension contains the actual data value.
+    DataPoint:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: Table name for this data point.
+        SeriesCode:
+          type: string
+          description: Series code identifying the specific series.
+        LineNumber:
+          type: string
+          description: Line number in the source table.
+        LineDescription:
+          type: string
+          description: Description of the line item.
+        TimePeriod:
+          type: string
+          description: Time period for the data point (e.g., 2023, 2023Q1).
+        CL_UNIT:
+          type: string
+          description: Classification unit.
+        MULT:
+          type: string
+          description: Multiplier for the data value (e.g., 6 = millions).
+        DataValue:
+          type: string
+          description: The actual data value as a string.
+        NoteRef:
+          type: string
+          description: Reference to note, if applicable.
+    RequestInfo:
+      type: object
+      properties:
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
+    ErrorResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Error:
+                  type: object
+                  properties:
+                    APIErrorCode:
+                      type: string
+                    APIErrorDescription:
+                      type: string
+                    ErrorDetail:
+                      type: string
+tags:
+  - name: Metadata
+    description: Methods for discovering available datasets, parameters, and valid values.
+  - name: National Accounts
+    description: National Income and Product Accounts, Fixed Assets, and related national economic statistics.
+  - name: Regional
+    description: State, metropolitan area, and county level economic data.
+  - name: Industry
+    description: GDP by industry, input-output accounts, and sector-level data.
+  - name: International
+    description: International transactions, investment position, and multinational enterprise data.

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/the-bureau-of-economic-analysis/main/json-schema/the-bureau-of-economic-analysis-dataset-schema.json",
+  "title": "BEA Dataset",
+  "description": "Schema for a BEA dataset entry as returned by the GetDatasetList method.",
+  "type": "object",
+  "properties": {
+    "DatasetName": {
+      "type": "string",
+      "description": "Unique identifier for the dataset used in API requests.",
+      "enum": [
+        "NIPA",
+        "NIUnderlyingDetail",
+        "MNE",
+        "FixedAssets",
+        "ITA",
+        "IIP",
+        "InputOutput",
+        "IntlServTrade",
+        "IntlServSTA",
+        "GDPbyIndustry",
+        "Regional",
+        "UnderlyingGDPbyIndustry",
+        "APIDatasetMetaData"
+      ]
+    },
+    "DatasetDescription": {
+      "type": "string",
+      "description": "Human-readable description of the dataset content and scope."
+    }
+  },
+  "required": ["DatasetName", "DatasetDescription"]
+}
