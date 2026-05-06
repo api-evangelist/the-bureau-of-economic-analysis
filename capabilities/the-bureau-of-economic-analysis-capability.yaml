@@ -1,0 +1,955 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bureau of Economic Analysis API
+  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics
+    using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and
+    the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational
+    Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output
+    tables, Regional data, GDP by Industry, and more.
+  tags:
+  - The
+  - Bureau
+  - Of
+  - Economic
+  - Analysis
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: the-bureau-of-economic-analysis
+    baseUri: https://apps.bea.gov/api/data
+    description: Bureau of Economic Analysis API HTTP API.
+    authentication:
+      type: apikey
+      in: query
+      name: UserID
+      value: '{{THE_BUREAU_OF_ECONOMIC_ANALYSIS_TOKEN}}'
+    resources:
+    - name: resource
+      path: /
+      operations:
+      - name: getdatasetlist
+        method: GET
+        description: Get Dataset List
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+          description: Your registered BEA API key (36-character UUID).
+        - name: method
+          in: query
+          type: string
+          required: true
+          description: API method to invoke.
+        - name: ResultFormat
+          in: query
+          type: string
+          description: Format for the response data.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: parameters
+      path: /parameters
+      operations:
+      - name: getparameterlist
+        method: GET
+        description: Get Parameter List
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+          description: Your registered BEA API key.
+        - name: method
+          in: query
+          type: string
+          required: true
+          description: API method to invoke.
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+          description: Name of the dataset for which to retrieve parameters.
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: parameter-values
+      path: /parameter-values
+      operations:
+      - name: getparametervalues
+        method: GET
+        description: Get Parameter Values
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: ParameterName
+          in: query
+          type: string
+          required: true
+          description: Name of the parameter for which to retrieve valid values.
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: nipa-data
+      path: /nipa-data
+      operations:
+      - name: getnipadata
+        method: GET
+        description: Get NIPA Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableName
+          in: query
+          type: string
+          required: true
+          description: NIPA table name (e.g., T10101 for GDP).
+        - name: Frequency
+          in: query
+          type: string
+          required: true
+          description: Data frequency.
+        - name: Year
+          in: query
+          type: string
+          required: true
+          description: Year(s) for data retrieval. Use 'X' for all years.
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: regional-data
+      path: /regional-data
+      operations:
+      - name: getregionaldata
+        method: GET
+        description: Get Regional Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableName
+          in: query
+          type: string
+          required: true
+          description: Regional table code (e.g., SQGDP1 for Quarterly GDP by State).
+        - name: LineCode
+          in: query
+          type: integer
+          required: true
+          description: Line code within the regional table.
+        - name: GeoFips
+          in: query
+          type: string
+          required: true
+          description: Geographic FIPS code. Use 'STATE' for all states, '00000' for US total.
+        - name: Year
+          in: query
+          type: string
+          required: true
+          description: Year(s) for data retrieval. Use 'LAST5' for last 5 years.
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: gdp-by-industry-data
+      path: /gdp-by-industry-data
+      operations:
+      - name: getgdpbyindustrydata
+        method: GET
+        description: Get GDP by Industry Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableID
+          in: query
+          type: integer
+          required: true
+          description: Table identifier within GDPbyIndustry dataset.
+        - name: Frequency
+          in: query
+          type: string
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: Industry
+          in: query
+          type: string
+          required: true
+          description: Industry code. Use 'ALL' for all industries.
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ita-data
+      path: /ita-data
+      operations:
+      - name: getitadata
+        method: GET
+        description: Get International Transactions Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: Indicator
+          in: query
+          type: string
+          required: true
+          description: ITA indicator code (e.g., BalGds for Balance on Goods).
+        - name: AreaOrCountry
+          in: query
+          type: string
+          required: true
+          description: Country or area code. Use 'AllCountries' for all.
+        - name: Frequency
+          in: query
+          type: string
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: fixed-assets-data
+      path: /fixed-assets-data
+      operations:
+      - name: getfixedassetsdata
+        method: GET
+        description: Get Fixed Assets Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableName
+          in: query
+          type: string
+          required: true
+          description: Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock).
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: input-output-data
+      path: /input-output-data
+      operations:
+      - name: getinputoutputdata
+        method: GET
+        description: Get Input-Output Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableID
+          in: query
+          type: integer
+          required: true
+          description: Input-Output table identifier.
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: mne-data
+      path: /mne-data
+      operations:
+      - name: getmnedata
+        method: GET
+        description: Get Multinational Enterprises Data
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: DirectionOfInvestment
+          in: query
+          type: string
+          required: true
+          description: Direction of investment - outward (US parent) or inward (foreign parent).
+        - name: ClassificationCode
+          in: query
+          type: string
+          required: true
+          description: Industry or country classification code.
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: SeriesID
+          in: query
+          type: integer
+          required: true
+          description: MNE series identifier for the measure requested.
+        - name: ResultFormat
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: the-bureau-of-economic-analysis-rest
+    description: REST adapter for Bureau of Economic Analysis API.
+    resources:
+    - path: /
+      name: getdatasetlist
+      operations:
+      - method: GET
+        name: getdatasetlist
+        description: Get Dataset List
+        call: the-bureau-of-economic-analysis.getdatasetlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /parameters
+      name: getparameterlist
+      operations:
+      - method: GET
+        name: getparameterlist
+        description: Get Parameter List
+        call: the-bureau-of-economic-analysis.getparameterlist
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /parameter-values
+      name: getparametervalues
+      operations:
+      - method: GET
+        name: getparametervalues
+        description: Get Parameter Values
+        call: the-bureau-of-economic-analysis.getparametervalues
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /nipa-data
+      name: getnipadata
+      operations:
+      - method: GET
+        name: getnipadata
+        description: Get NIPA Data
+        call: the-bureau-of-economic-analysis.getnipadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /regional-data
+      name: getregionaldata
+      operations:
+      - method: GET
+        name: getregionaldata
+        description: Get Regional Data
+        call: the-bureau-of-economic-analysis.getregionaldata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /gdp-by-industry-data
+      name: getgdpbyindustrydata
+      operations:
+      - method: GET
+        name: getgdpbyindustrydata
+        description: Get GDP by Industry Data
+        call: the-bureau-of-economic-analysis.getgdpbyindustrydata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /ita-data
+      name: getitadata
+      operations:
+      - method: GET
+        name: getitadata
+        description: Get International Transactions Data
+        call: the-bureau-of-economic-analysis.getitadata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /fixed-assets-data
+      name: getfixedassetsdata
+      operations:
+      - method: GET
+        name: getfixedassetsdata
+        description: Get Fixed Assets Data
+        call: the-bureau-of-economic-analysis.getfixedassetsdata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /input-output-data
+      name: getinputoutputdata
+      operations:
+      - method: GET
+        name: getinputoutputdata
+        description: Get Input-Output Data
+        call: the-bureau-of-economic-analysis.getinputoutputdata
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /mne-data
+      name: getmnedata
+      operations:
+      - method: GET
+        name: getmnedata
+        description: Get Multinational Enterprises Data
+        call: the-bureau-of-economic-analysis.getmnedata
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: the-bureau-of-economic-analysis-mcp
+    transport: http
+    description: MCP adapter for Bureau of Economic Analysis API for AI agent use.
+    tools:
+    - name: getdatasetlist
+      description: Get Dataset List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getdatasetlist
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: Your registered BEA API key (36-character UUID).
+        required: true
+      - name: method
+        type: string
+        description: API method to invoke.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: Format for the response data.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getparameterlist
+      description: Get Parameter List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getparameterlist
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: Your registered BEA API key.
+        required: true
+      - name: method
+        type: string
+        description: API method to invoke.
+        required: true
+      - name: DatasetName
+        type: string
+        description: Name of the dataset for which to retrieve parameters.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getparametervalues
+      description: Get Parameter Values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getparametervalues
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        ParameterName: tools.ParameterName
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: ParameterName
+        type: string
+        description: Name of the parameter for which to retrieve valid values.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getnipadata
+      description: Get NIPA Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getnipadata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableName: tools.TableName
+        Frequency: tools.Frequency
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: TableName
+        type: string
+        description: NIPA table name (e.g., T10101 for GDP).
+        required: true
+      - name: Frequency
+        type: string
+        description: Data frequency.
+        required: true
+      - name: Year
+        type: string
+        description: Year(s) for data retrieval. Use 'X' for all years.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getregionaldata
+      description: Get Regional Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getregionaldata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableName: tools.TableName
+        LineCode: tools.LineCode
+        GeoFips: tools.GeoFips
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: TableName
+        type: string
+        description: Regional table code (e.g., SQGDP1 for Quarterly GDP by State).
+        required: true
+      - name: LineCode
+        type: integer
+        description: Line code within the regional table.
+        required: true
+      - name: GeoFips
+        type: string
+        description: Geographic FIPS code. Use 'STATE' for all states, '00000' for US total.
+        required: true
+      - name: Year
+        type: string
+        description: Year(s) for data retrieval. Use 'LAST5' for last 5 years.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getgdpbyindustrydata
+      description: Get GDP by Industry Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getgdpbyindustrydata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableID: tools.TableID
+        Frequency: tools.Frequency
+        Year: tools.Year
+        Industry: tools.Industry
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: TableID
+        type: integer
+        description: Table identifier within GDPbyIndustry dataset.
+        required: true
+      - name: Frequency
+        type: string
+        description: Frequency
+        required: true
+      - name: Year
+        type: string
+        description: Year
+        required: true
+      - name: Industry
+        type: string
+        description: Industry code. Use 'ALL' for all industries.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getitadata
+      description: Get International Transactions Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getitadata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        Indicator: tools.Indicator
+        AreaOrCountry: tools.AreaOrCountry
+        Frequency: tools.Frequency
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: Indicator
+        type: string
+        description: ITA indicator code (e.g., BalGds for Balance on Goods).
+        required: true
+      - name: AreaOrCountry
+        type: string
+        description: Country or area code. Use 'AllCountries' for all.
+        required: true
+      - name: Frequency
+        type: string
+        description: Frequency
+        required: true
+      - name: Year
+        type: string
+        description: Year
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfixedassetsdata
+      description: Get Fixed Assets Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getfixedassetsdata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableName: tools.TableName
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: TableName
+        type: string
+        description: Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock).
+        required: true
+      - name: Year
+        type: string
+        description: Year
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getinputoutputdata
+      description: Get Input-Output Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getinputoutputdata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableID: tools.TableID
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: TableID
+        type: integer
+        description: Input-Output table identifier.
+        required: true
+      - name: Year
+        type: string
+        description: Year
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmnedata
+      description: Get Multinational Enterprises Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis.getmnedata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        DirectionOfInvestment: tools.DirectionOfInvestment
+        ClassificationCode: tools.ClassificationCode
+        Year: tools.Year
+        SeriesID: tools.SeriesID
+        ResultFormat: tools.ResultFormat
+      inputParameters:
+      - name: UserID
+        type: string
+        description: UserID
+        required: true
+      - name: method
+        type: string
+        description: method
+        required: true
+      - name: DatasetName
+        type: string
+        description: DatasetName
+        required: true
+      - name: DirectionOfInvestment
+        type: string
+        description: Direction of investment - outward (US parent) or inward (foreign parent).
+        required: true
+      - name: ClassificationCode
+        type: string
+        description: Industry or country classification code.
+        required: true
+      - name: Year
+        type: string
+        description: Year
+        required: true
+      - name: SeriesID
+        type: integer
+        description: MNE series identifier for the measure requested.
+        required: true
+      - name: ResultFormat
+        type: string
+        description: ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    THE_BUREAU_OF_ECONOMIC_ANALYSIS_TOKEN: THE_BUREAU_OF_ECONOMIC_ANALYSIS_TOKEN
