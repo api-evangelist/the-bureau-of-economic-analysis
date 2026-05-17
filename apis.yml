@@ -16,7 +16,7 @@ apis:
       - url: https://www.bea.gov/resources/for-developers
         type: Documentation
       - url: https://apps.bea.gov/api/signup/
-        type: Sign Up
+        type: SignUp
       - url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
         type: GettingStarted
       - url: https://apps.bea.gov/API/docs/index.htm
@@ -71,7 +71,7 @@ tags:
   - National Accounts
   - Open Data
   - Statistics
-type: Contract
+kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-11-14'
@@ -92,11 +92,11 @@ common:
     url: https://www.bea.gov/
   - type: Documentation
     url: https://www.bea.gov/resources/for-developers
-  - type: Sign Up
+  - type: SignUp
     url: https://apps.bea.gov/api/signup/
   - type: GettingStarted
     url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/us-bea
   - type: OpenAPI
     url: >-
