@@ -1,0 +1,190 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bureau of Economic Analysis API — National Accounts
+  description: 'Bureau of Economic Analysis API — National Accounts. 2 operations. Lead operation: Get Fixed Assets Data.
+    Self-contained Naftiko capability covering one The Bureau Of Economic Analysis business surface.'
+  tags:
+  - The Bureau Of Economic Analysis
+  - National Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY: THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-bureau-of-economic-analysis-national-accounts
+    baseUri: https://apps.bea.gov/api/data
+    description: Bureau of Economic Analysis API — National Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: fixed-assets-data
+      path: /fixed-assets-data
+      operations:
+      - name: getfixedassetsdata
+        method: GET
+        description: Get Fixed Assets Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableName
+          in: query
+          type: string
+          description: Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock).
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    - name: nipa-data
+      path: /nipa-data
+      operations:
+      - name: getnipadata
+        method: GET
+        description: Get NIPA Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableName
+          in: query
+          type: string
+          description: NIPA table name (e.g., T10101 for GDP).
+          required: true
+        - name: Frequency
+          in: query
+          type: string
+          description: Data frequency.
+          required: true
+        - name: Year
+          in: query
+          type: string
+          description: Year(s) for data retrieval. Use 'X' for all years.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: UserID
+      value: '{{env.THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-bureau-of-economic-analysis-national-accounts-rest
+    port: 8080
+    description: REST adapter for Bureau of Economic Analysis API — National Accounts. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/fixed-assets-data
+      name: fixed-assets-data
+      description: REST surface for fixed-assets-data.
+      operations:
+      - method: GET
+        name: getfixedassetsdata
+        description: Get Fixed Assets Data
+        call: the-bureau-of-economic-analysis-national-accounts.getfixedassetsdata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          TableName: rest.TableName
+          Year: rest.Year
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/nipa-data
+      name: nipa-data
+      description: REST surface for nipa-data.
+      operations:
+      - method: GET
+        name: getnipadata
+        description: Get NIPA Data
+        call: the-bureau-of-economic-analysis-national-accounts.getnipadata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          TableName: rest.TableName
+          Frequency: rest.Frequency
+          Year: rest.Year
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-bureau-of-economic-analysis-national-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bureau of Economic Analysis API — National Accounts. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-fixed-assets-data
+      description: Get Fixed Assets Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-national-accounts.getfixedassetsdata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableName: tools.TableName
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nipa-data
+      description: Get NIPA Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-national-accounts.getnipadata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableName: tools.TableName
+        Frequency: tools.Frequency
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.

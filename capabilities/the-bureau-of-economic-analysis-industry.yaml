@@ -1,0 +1,195 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bureau of Economic Analysis API — Industry
+  description: 'Bureau of Economic Analysis API — Industry. 2 operations. Lead operation: Get GDP by Industry Data. Self-contained
+    Naftiko capability covering one The Bureau Of Economic Analysis business surface.'
+  tags:
+  - The Bureau Of Economic Analysis
+  - Industry
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY: THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-bureau-of-economic-analysis-industry
+    baseUri: https://apps.bea.gov/api/data
+    description: Bureau of Economic Analysis API — Industry business capability. Self-contained, no shared references.
+    resources:
+    - name: gdp-by-industry-data
+      path: /gdp-by-industry-data
+      operations:
+      - name: getgdpbyindustrydata
+        method: GET
+        description: Get GDP by Industry Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableID
+          in: query
+          type: integer
+          description: Table identifier within GDPbyIndustry dataset.
+          required: true
+        - name: Frequency
+          in: query
+          type: string
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: Industry
+          in: query
+          type: string
+          description: Industry code. Use 'ALL' for all industries.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    - name: input-output-data
+      path: /input-output-data
+      operations:
+      - name: getinputoutputdata
+        method: GET
+        description: Get Input-Output Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableID
+          in: query
+          type: integer
+          description: Input-Output table identifier.
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: UserID
+      value: '{{env.THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-bureau-of-economic-analysis-industry-rest
+    port: 8080
+    description: REST adapter for Bureau of Economic Analysis API — Industry. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/gdp-by-industry-data
+      name: gdp-by-industry-data
+      description: REST surface for gdp-by-industry-data.
+      operations:
+      - method: GET
+        name: getgdpbyindustrydata
+        description: Get GDP by Industry Data
+        call: the-bureau-of-economic-analysis-industry.getgdpbyindustrydata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          TableID: rest.TableID
+          Frequency: rest.Frequency
+          Year: rest.Year
+          Industry: rest.Industry
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/input-output-data
+      name: input-output-data
+      description: REST surface for input-output-data.
+      operations:
+      - method: GET
+        name: getinputoutputdata
+        description: Get Input-Output Data
+        call: the-bureau-of-economic-analysis-industry.getinputoutputdata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          TableID: rest.TableID
+          Year: rest.Year
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-bureau-of-economic-analysis-industry-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bureau of Economic Analysis API — Industry. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-gdp-industry-data
+      description: Get GDP by Industry Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-industry.getgdpbyindustrydata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableID: tools.TableID
+        Frequency: tools.Frequency
+        Year: tools.Year
+        Industry: tools.Industry
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-input-output-data
+      description: Get Input-Output Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-industry.getinputoutputdata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableID: tools.TableID
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.

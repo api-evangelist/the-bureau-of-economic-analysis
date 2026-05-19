@@ -1,0 +1,209 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bureau of Economic Analysis API — International
+  description: 'Bureau of Economic Analysis API — International. 2 operations. Lead operation: Get International Transactions
+    Data. Self-contained Naftiko capability covering one The Bureau Of Economic Analysis business surface.'
+  tags:
+  - The Bureau Of Economic Analysis
+  - International
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY: THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-bureau-of-economic-analysis-international
+    baseUri: https://apps.bea.gov/api/data
+    description: Bureau of Economic Analysis API — International business capability. Self-contained, no shared references.
+    resources:
+    - name: ita-data
+      path: /ita-data
+      operations:
+      - name: getitadata
+        method: GET
+        description: Get International Transactions Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: Indicator
+          in: query
+          type: string
+          description: ITA indicator code (e.g., BalGds for Balance on Goods).
+          required: true
+        - name: AreaOrCountry
+          in: query
+          type: string
+          description: Country or area code. Use 'AllCountries' for all.
+          required: true
+        - name: Frequency
+          in: query
+          type: string
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    - name: mne-data
+      path: /mne-data
+      operations:
+      - name: getmnedata
+        method: GET
+        description: Get Multinational Enterprises Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: DirectionOfInvestment
+          in: query
+          type: string
+          description: Direction of investment - outward (US parent) or inward (foreign parent).
+          required: true
+        - name: ClassificationCode
+          in: query
+          type: string
+          description: Industry or country classification code.
+          required: true
+        - name: Year
+          in: query
+          type: string
+          required: true
+        - name: SeriesID
+          in: query
+          type: integer
+          description: MNE series identifier for the measure requested.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: UserID
+      value: '{{env.THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-bureau-of-economic-analysis-international-rest
+    port: 8080
+    description: REST adapter for Bureau of Economic Analysis API — International. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/ita-data
+      name: ita-data
+      description: REST surface for ita-data.
+      operations:
+      - method: GET
+        name: getitadata
+        description: Get International Transactions Data
+        call: the-bureau-of-economic-analysis-international.getitadata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          Indicator: rest.Indicator
+          AreaOrCountry: rest.AreaOrCountry
+          Frequency: rest.Frequency
+          Year: rest.Year
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mne-data
+      name: mne-data
+      description: REST surface for mne-data.
+      operations:
+      - method: GET
+        name: getmnedata
+        description: Get Multinational Enterprises Data
+        call: the-bureau-of-economic-analysis-international.getmnedata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          DirectionOfInvestment: rest.DirectionOfInvestment
+          ClassificationCode: rest.ClassificationCode
+          Year: rest.Year
+          SeriesID: rest.SeriesID
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-bureau-of-economic-analysis-international-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bureau of Economic Analysis API — International. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: get-international-transactions-data
+      description: Get International Transactions Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-international.getitadata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        Indicator: tools.Indicator
+        AreaOrCountry: tools.AreaOrCountry
+        Frequency: tools.Frequency
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-multinational-enterprises-data
+      description: Get Multinational Enterprises Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-international.getmnedata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        DirectionOfInvestment: tools.DirectionOfInvestment
+        ClassificationCode: tools.ClassificationCode
+        Year: tools.Year
+        SeriesID: tools.SeriesID
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.

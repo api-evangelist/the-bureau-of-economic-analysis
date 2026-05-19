@@ -1,0 +1,221 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bureau of Economic Analysis API — Metadata
+  description: 'Bureau of Economic Analysis API — Metadata. 3 operations. Lead operation: Get Dataset List. Self-contained
+    Naftiko capability covering one The Bureau Of Economic Analysis business surface.'
+  tags:
+  - The Bureau Of Economic Analysis
+  - Metadata
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY: THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-bureau-of-economic-analysis-metadata
+    baseUri: https://apps.bea.gov/api/data
+    description: Bureau of Economic Analysis API — Metadata business capability. Self-contained, no shared references.
+    resources:
+    - name: root
+      path: /
+      operations:
+      - name: getdatasetlist
+        method: GET
+        description: Get Dataset List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          description: Your registered BEA API key (36-character UUID).
+          required: true
+        - name: method
+          in: query
+          type: string
+          description: API method to invoke.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+          description: Format for the response data.
+    - name: parameter-values
+      path: /parameter-values
+      operations:
+      - name: getparametervalues
+        method: GET
+        description: Get Parameter Values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: ParameterName
+          in: query
+          type: string
+          description: Name of the parameter for which to retrieve valid values.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    - name: parameters
+      path: /parameters
+      operations:
+      - name: getparameterlist
+        method: GET
+        description: Get Parameter List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          description: Your registered BEA API key.
+          required: true
+        - name: method
+          in: query
+          type: string
+          description: API method to invoke.
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          description: Name of the dataset for which to retrieve parameters.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: UserID
+      value: '{{env.THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-bureau-of-economic-analysis-metadata-rest
+    port: 8080
+    description: REST adapter for Bureau of Economic Analysis API — Metadata. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1
+      name: root
+      description: REST surface for root.
+      operations:
+      - method: GET
+        name: getdatasetlist
+        description: Get Dataset List
+        call: the-bureau-of-economic-analysis-metadata.getdatasetlist
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/parameter-values
+      name: parameter-values
+      description: REST surface for parameter-values.
+      operations:
+      - method: GET
+        name: getparametervalues
+        description: Get Parameter Values
+        call: the-bureau-of-economic-analysis-metadata.getparametervalues
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          ParameterName: rest.ParameterName
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/parameters
+      name: parameters
+      description: REST surface for parameters.
+      operations:
+      - method: GET
+        name: getparameterlist
+        description: Get Parameter List
+        call: the-bureau-of-economic-analysis-metadata.getparameterlist
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-bureau-of-economic-analysis-metadata-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bureau of Economic Analysis API — Metadata. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-dataset-list
+      description: Get Dataset List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-metadata.getdatasetlist
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-parameter-values
+      description: Get Parameter Values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-metadata.getparametervalues
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        ParameterName: tools.ParameterName
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-parameter-list
+      description: Get Parameter List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-metadata.getparameterlist
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.

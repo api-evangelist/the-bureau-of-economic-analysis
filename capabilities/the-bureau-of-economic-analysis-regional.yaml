@@ -1,0 +1,126 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Bureau of Economic Analysis API — Regional
+  description: 'Bureau of Economic Analysis API — Regional. 1 operations. Lead operation: Get Regional Data. Self-contained
+    Naftiko capability covering one The Bureau Of Economic Analysis business surface.'
+  tags:
+  - The Bureau Of Economic Analysis
+  - Regional
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY: THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: the-bureau-of-economic-analysis-regional
+    baseUri: https://apps.bea.gov/api/data
+    description: Bureau of Economic Analysis API — Regional business capability. Self-contained, no shared references.
+    resources:
+    - name: regional-data
+      path: /regional-data
+      operations:
+      - name: getregionaldata
+        method: GET
+        description: Get Regional Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: UserID
+          in: query
+          type: string
+          required: true
+        - name: method
+          in: query
+          type: string
+          required: true
+        - name: DatasetName
+          in: query
+          type: string
+          required: true
+        - name: TableName
+          in: query
+          type: string
+          description: Regional table code (e.g., SQGDP1 for Quarterly GDP by State).
+          required: true
+        - name: LineCode
+          in: query
+          type: integer
+          description: Line code within the regional table.
+          required: true
+        - name: GeoFips
+          in: query
+          type: string
+          description: Geographic FIPS code. Use 'STATE' for all states, '00000' for US total.
+          required: true
+        - name: Year
+          in: query
+          type: string
+          description: Year(s) for data retrieval. Use 'LAST5' for last 5 years.
+          required: true
+        - name: ResultFormat
+          in: query
+          type: string
+    authentication:
+      type: apikey
+      key: UserID
+      value: '{{env.THE_BUREAU_OF_ECONOMIC_ANALYSIS_API_KEY}}'
+      placement: query
+  exposes:
+  - type: rest
+    namespace: the-bureau-of-economic-analysis-regional-rest
+    port: 8080
+    description: REST adapter for Bureau of Economic Analysis API — Regional. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/regional-data
+      name: regional-data
+      description: REST surface for regional-data.
+      operations:
+      - method: GET
+        name: getregionaldata
+        description: Get Regional Data
+        call: the-bureau-of-economic-analysis-regional.getregionaldata
+        with:
+          UserID: rest.UserID
+          method: rest.method
+          DatasetName: rest.DatasetName
+          TableName: rest.TableName
+          LineCode: rest.LineCode
+          GeoFips: rest.GeoFips
+          Year: rest.Year
+          ResultFormat: rest.ResultFormat
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: the-bureau-of-economic-analysis-regional-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Bureau of Economic Analysis API — Regional. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-regional-data
+      description: Get Regional Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: the-bureau-of-economic-analysis-regional.getregionaldata
+      with:
+        UserID: tools.UserID
+        method: tools.method
+        DatasetName: tools.DatasetName
+        TableName: tools.TableName
+        LineCode: tools.LineCode
+        GeoFips: tools.GeoFips
+        Year: tools.Year
+        ResultFormat: tools.ResultFormat
+      outputParameters:
+      - type: object
+        mapping: $.
