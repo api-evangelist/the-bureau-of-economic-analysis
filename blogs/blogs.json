@@ -4,10 +4,18 @@
     {
       "source": "https://apps.bea.gov/rss/rss.xml",
       "feed_url": "https://apps.bea.gov/rss/rss.xml",
-      "title": "U.S. Bureau of Economic Analysis",
-      "saved": 37
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://apps.bea.gov/itable",
+      "feed_url": "https://apps.bea.gov/itable",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 48,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 50,
+  "fetched": "2026-06-01T23:35:02Z"
 }
