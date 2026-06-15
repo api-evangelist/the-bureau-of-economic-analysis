@@ -1,0 +1,526 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bureau of Economic Analysis API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "UserID",
+      "value": "{{UserID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Dataset List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query",
+                "description": "Your registered BEA API key (36-character UUID)."
+              },
+              {
+                "name": "method",
+                "value": "GetDatasetList",
+                "type": "query",
+                "description": "API method to invoke."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query",
+                "description": "Format for the response data."
+              }
+            ]
+          },
+          "docs": "Returns a list of all available BEA datasets with descriptions."
+        },
+        {
+          "info": {
+            "name": "Get Parameter List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/parameters",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query",
+                "description": "Your registered BEA API key."
+              },
+              {
+                "name": "method",
+                "value": "GetParameterList",
+                "type": "query",
+                "description": "API method to invoke."
+              },
+              {
+                "name": "DatasetName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the dataset for which to retrieve parameters."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of the parameters (required and optional) for a particular dataset."
+        },
+        {
+          "info": {
+            "name": "Get Parameter Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/parameter-values",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetParameterValues",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ParameterName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the parameter for which to retrieve valid values."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of valid values for a specified parameter within a dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "National Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NIPA Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/nipa-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "NIPA",
+                "type": "query"
+              },
+              {
+                "name": "TableName",
+                "value": "T10101",
+                "type": "query",
+                "description": "NIPA table name (e.g., T10101 for GDP)."
+              },
+              {
+                "name": "Frequency",
+                "value": "Q",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "Year",
+                "value": "2023,2024",
+                "type": "query",
+                "description": "Year(s) for data retrieval. Use 'X' for all years."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the National Income and Product Accounts (NIPA) dataset. NIPA tables cover GDP, personal income, consumer spending, corporate profits, and other national economic aggregates."
+        },
+        {
+          "info": {
+            "name": "Get Fixed Assets Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/fixed-assets-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "FixedAssets",
+                "type": "query"
+              },
+              {
+                "name": "TableName",
+                "value": "FAAt101",
+                "type": "query",
+                "description": "Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock)."
+              },
+              {
+                "name": "Year",
+                "value": "2022,2023",
+                "type": "query"
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the Fixed Assets dataset covering net stock of fixed assets, depreciation, investment, and related measures for private and government fixed assets in the United States."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Regional",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Regional Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/regional-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "Regional",
+                "type": "query"
+              },
+              {
+                "name": "TableName",
+                "value": "SQGDP1",
+                "type": "query",
+                "description": "Regional table code (e.g., SQGDP1 for Quarterly GDP by State)."
+              },
+              {
+                "name": "LineCode",
+                "value": "1",
+                "type": "query",
+                "description": "Line code within the regional table."
+              },
+              {
+                "name": "GeoFips",
+                "value": "STATE",
+                "type": "query",
+                "description": "Geographic FIPS code. Use 'STATE' for all states, '00000' for US total."
+              },
+              {
+                "name": "Year",
+                "value": "2023,2024",
+                "type": "query",
+                "description": "Year(s) for data retrieval. Use 'LAST5' for last 5 years."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves state and local area economic data from the Regional dataset. Includes GDP by state, personal income, and employment data at the state, metropolitan statistical area (MSA), and county level."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Industry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get GDP by Industry Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/gdp-by-industry-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "GDPbyIndustry",
+                "type": "query"
+              },
+              {
+                "name": "TableID",
+                "value": "1",
+                "type": "query",
+                "description": "Table identifier within GDPbyIndustry dataset."
+              },
+              {
+                "name": "Frequency",
+                "value": "A",
+                "type": "query"
+              },
+              {
+                "name": "Year",
+                "value": "2023",
+                "type": "query"
+              },
+              {
+                "name": "Industry",
+                "value": "ALL",
+                "type": "query",
+                "description": "Industry code. Use 'ALL' for all industries."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves GDP-by-industry data, including value added, gross output, and intermediate inputs by industry sector (NAICS-based)."
+        },
+        {
+          "info": {
+            "name": "Get Input-Output Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/input-output-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "InputOutput",
+                "type": "query"
+              },
+              {
+                "name": "TableID",
+                "value": "56",
+                "type": "query",
+                "description": "Input-Output table identifier."
+              },
+              {
+                "name": "Year",
+                "value": "2022",
+                "type": "query"
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the Input-Output dataset covering supply and use tables, requirements tables, and make and use tables for the U.S. economy."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "International",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get International Transactions Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/ita-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "ITA",
+                "type": "query"
+              },
+              {
+                "name": "Indicator",
+                "value": "BalGds",
+                "type": "query",
+                "description": "ITA indicator code (e.g., BalGds for Balance on Goods)."
+              },
+              {
+                "name": "AreaOrCountry",
+                "value": "AllCountries",
+                "type": "query",
+                "description": "Country or area code. Use 'AllCountries' for all."
+              },
+              {
+                "name": "Frequency",
+                "value": "A",
+                "type": "query"
+              },
+              {
+                "name": "Year",
+                "value": "2023",
+                "type": "query"
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the International Transactions Accounts (ITA) dataset. Covers U.S. current account, capital account, and financial account transactions with the rest of the world."
+        },
+        {
+          "info": {
+            "name": "Get Multinational Enterprises Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/mne-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "MNE",
+                "type": "query"
+              },
+              {
+                "name": "DirectionOfInvestment",
+                "value": "outward",
+                "type": "query",
+                "description": "Direction of investment - outward (US parent) or inward (foreign parent)."
+              },
+              {
+                "name": "ClassificationCode",
+                "value": "0",
+                "type": "query",
+                "description": "Industry or country classification code."
+              },
+              {
+                "name": "Year",
+                "value": "2022",
+                "type": "query"
+              },
+              {
+                "name": "SeriesID",
+                "value": "4",
+                "type": "query",
+                "description": "MNE series identifier for the measure requested."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data on U.S. multinational enterprises (MNEs) and foreign multinational enterprises operating in the United States, including financial and operating data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
