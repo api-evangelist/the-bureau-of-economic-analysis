@@ -15,7 +15,7 @@ apis:
       - url: https://www.bea.gov/resources/for-developers
         type: Documentation
       - url: https://apps.bea.gov/api/signup/
-        type: SignUp
+        type: Signup
       - url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
         type: GettingStarted
       - url: https://apps.bea.gov/API/docs/index.htm
@@ -56,10 +56,10 @@ apis:
     integrations:
       - url: https://github.com/us-bea/beaapi
         name: BEA Python Library
-        type: SDK
+        type: SDKs
       - url: https://github.com/us-bea/bea.R
         name: BEA R Library
-        type: SDK
+        type: SDKs
 name: The Bureau of Economic Analysis
 tags:
   - Economics
@@ -88,7 +88,7 @@ common:
     url: https://www.bea.gov/
   - type: Documentation
     url: https://www.bea.gov/resources/for-developers
-  - type: SignUp
+  - type: Signup
     url: https://apps.bea.gov/api/signup/
   - type: GettingStarted
     url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
