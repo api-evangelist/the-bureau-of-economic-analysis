@@ -82,6 +82,10 @@ description: >-
   state of the economy. The BEA Data API provides programmatic access to all published economic statistics including
   NIPA, regional data, international accounts, and industry-level data.
 common:
+  - type: DomainSecurity
+    url: security/the-bureau-of-economic-analysis-domain-security.yml
+  - type: Authentication
+    url: authentication/the-bureau-of-economic-analysis-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/bureau-of-economic-analysis
   - type: Website

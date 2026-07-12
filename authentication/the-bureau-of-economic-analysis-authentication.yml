@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/the-bureau-of-economic-analysis-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: query
+  parameter: UserID
+  description: BEA API key obtained by registering at https://apps.bea.gov/api/signup/
+  sources:
+  - openapi/the-bureau-of-economic-analysis-openapi.yml
