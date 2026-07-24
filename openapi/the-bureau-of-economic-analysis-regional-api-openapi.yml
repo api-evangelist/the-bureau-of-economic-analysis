@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: Bureau of Economic Analysis Industry Regional API
+  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.
+  version: 1.0.0
+  contact:
+    name: Bureau of Economic Analysis Developer Support
+    url: https://www.bea.gov/resources/for-developers
+  license:
+    name: Public Domain
+    url: https://www.bea.gov/help/faq/245
+servers:
+- url: https://apps.bea.gov/api/data
+  description: BEA API Production Server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Regional
+  description: State, metropolitan area, and county level economic data.
+paths:
+  /regional-data:
+    get:
+      operationId: getRegionalData
+      summary: Get Regional Data
+      description: Retrieves state and local area economic data from the Regional dataset. Includes GDP by state, personal income, and employment data at the state, metropolitan statistical area (MSA), and county level.
+      tags:
+      - Regional
+      parameters:
+      - name: UserID
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: method
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - GetData
+        example: GetData
+      - name: DatasetName
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Regional
+        example: Regional
+      - name: TableName
+        in: query
+        required: true
+        description: Regional table code (e.g., SQGDP1 for Quarterly GDP by State).
+        schema:
+          type: string
+        example: SQGDP1
+      - name: LineCode
+        in: query
+        required: true
+        description: Line code within the regional table.
+        schema:
+          type: integer
+        example: 1
+      - name: GeoFips
+        in: query
+        required: true
+        description: Geographic FIPS code. Use 'STATE' for all states, '00000' for US total.
+        schema:
+          type: string
+        example: STATE
+      - name: Year
+        in: query
+        required: true
+        description: Year(s) for data retrieval. Use 'LAST5' for last 5 years.
+        schema:
+          type: string
+        example: 2023,2024
+      - name: ResultFormat
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - JSON
+          - XML
+          default: JSON
+      responses:
+        '200':
+          description: Regional economic data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponse'
+components:
+  schemas:
+    Dimension:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Name of the dimension (e.g., TableName, Frequency, Year, Line).
+        DataType:
+          type: string
+          description: Data type of the dimension values.
+        IsValue:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: Indicates if this dimension contains the actual data value.
+    RequestInfo:
+      type: object
+      properties:
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
+    DataPoint:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: Table name for this data point.
+        SeriesCode:
+          type: string
+          description: Series code identifying the specific series.
+        LineNumber:
+          type: string
+          description: Line number in the source table.
+        LineDescription:
+          type: string
+          description: Description of the line item.
+        TimePeriod:
+          type: string
+          description: Time period for the data point (e.g., 2023, 2023Q1).
+        CL_UNIT:
+          type: string
+          description: Classification unit.
+        MULT:
+          type: string
+          description: Multiplier for the data value (e.g., 6 = millions).
+        DataValue:
+          type: string
+          description: The actual data value as a string.
+        NoteRef:
+          type: string
+          description: Reference to note, if applicable.
+    DataResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Statistic:
+                  type: string
+                  description: Name of the statistic returned.
+                UnitOfMeasure:
+                  type: string
+                  description: Unit of measure for the data values.
+                PublicTable:
+                  type: string
+                  description: Name of the public table.
+                UTCProductionTime:
+                  type: string
+                  format: date-time
+                  description: Production timestamp of the data.
+                NoteRef:
+                  type: string
+                  description: Reference to any notes on the data.
+                Dimensions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Dimension'
+                Data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DataPoint'
+                Notes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      NoteRef:
+                        type: string
+                      NoteText:
+                        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: UserID
+      description: BEA API key obtained by registering at https://apps.bea.gov/api/signup/

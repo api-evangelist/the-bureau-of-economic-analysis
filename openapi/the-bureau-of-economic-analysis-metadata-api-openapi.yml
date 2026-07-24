@@ -1,0 +1,294 @@
+openapi: 3.0.3
+info:
+  title: Bureau of Economic Analysis Industry Metadata API
+  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.
+  version: 1.0.0
+  contact:
+    name: Bureau of Economic Analysis Developer Support
+    url: https://www.bea.gov/resources/for-developers
+  license:
+    name: Public Domain
+    url: https://www.bea.gov/help/faq/245
+servers:
+- url: https://apps.bea.gov/api/data
+  description: BEA API Production Server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Metadata
+  description: Methods for discovering available datasets, parameters, and valid values.
+paths:
+  /:
+    get:
+      operationId: getDatasetList
+      summary: Get Dataset List
+      description: Returns a list of all available BEA datasets with descriptions.
+      tags:
+      - Metadata
+      parameters:
+      - name: UserID
+        in: query
+        required: true
+        description: Your registered BEA API key (36-character UUID).
+        schema:
+          type: string
+          format: uuid
+      - name: method
+        in: query
+        required: true
+        description: API method to invoke.
+        schema:
+          type: string
+          enum:
+          - GetDatasetList
+        example: GetDatasetList
+      - name: ResultFormat
+        in: query
+        required: false
+        description: Format for the response data.
+        schema:
+          type: string
+          enum:
+          - JSON
+          - XML
+          default: JSON
+      responses:
+        '200':
+          description: List of available BEA datasets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetListResponse'
+        '400':
+          description: Invalid request parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /parameters:
+    get:
+      operationId: getParameterList
+      summary: Get Parameter List
+      description: Returns a list of the parameters (required and optional) for a particular dataset.
+      tags:
+      - Metadata
+      parameters:
+      - name: UserID
+        in: query
+        required: true
+        description: Your registered BEA API key.
+        schema:
+          type: string
+          format: uuid
+      - name: method
+        in: query
+        required: true
+        description: API method to invoke.
+        schema:
+          type: string
+          enum:
+          - GetParameterList
+        example: GetParameterList
+      - name: DatasetName
+        in: query
+        required: true
+        description: Name of the dataset for which to retrieve parameters.
+        schema:
+          type: string
+          enum:
+          - NIPA
+          - NIUnderlyingDetail
+          - MNE
+          - FixedAssets
+          - ITA
+          - IIP
+          - InputOutput
+          - IntlServTrade
+          - IntlServSTA
+          - GDPbyIndustry
+          - Regional
+          - UnderlyingGDPbyIndustry
+          - APIDatasetMetaData
+      - name: ResultFormat
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - JSON
+          - XML
+          default: JSON
+      responses:
+        '200':
+          description: List of parameters for the specified dataset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterListResponse'
+  /parameter-values:
+    get:
+      operationId: getParameterValues
+      summary: Get Parameter Values
+      description: Returns a list of valid values for a specified parameter within a dataset.
+      tags:
+      - Metadata
+      parameters:
+      - name: UserID
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: method
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - GetParameterValues
+        example: GetParameterValues
+      - name: DatasetName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ParameterName
+        in: query
+        required: true
+        description: Name of the parameter for which to retrieve valid values.
+        schema:
+          type: string
+      - name: ResultFormat
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - JSON
+          - XML
+          default: JSON
+      responses:
+        '200':
+          description: Valid values for the specified parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterValuesResponse'
+components:
+  schemas:
+    RequestInfo:
+      type: object
+      properties:
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
+    ParameterListResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Parameter:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ParameterName:
+                        type: string
+                      ParameterDataType:
+                        type: string
+                      ParameterDescription:
+                        type: string
+                      ParameterIsRequired:
+                        type: string
+                        enum:
+                        - '0'
+                        - '1'
+                      ParameterDefaultValue:
+                        type: string
+                      MultipleAcceptedFlag:
+                        type: string
+                        enum:
+                        - '0'
+                        - '1'
+    ErrorResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Error:
+                  type: object
+                  properties:
+                    APIErrorCode:
+                      type: string
+                    APIErrorDescription:
+                      type: string
+                    ErrorDetail:
+                      type: string
+    DatasetListResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Dataset:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      DatasetName:
+                        type: string
+                        description: Unique name of the dataset.
+                      DatasetDescription:
+                        type: string
+                        description: Human-readable description of the dataset.
+    ParameterValuesResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                ParamValue:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Key:
+                        type: string
+                        description: Valid value key for the parameter.
+                      Desc:
+                        type: string
+                        description: Description of the parameter value.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: UserID
+      description: BEA API key obtained by registering at https://apps.bea.gov/api/signup/
