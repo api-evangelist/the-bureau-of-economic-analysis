@@ -1,65 +1,87 @@
 aid: the-bureau-of-economic-analysis
 url: https://raw.githubusercontent.com/api-evangelist/the-bureau-of-economic-analysis/refs/heads/main/apis.yml
 apis:
-  - aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis
-    name: The Bureau of Economic Analysis API
-    tags:
-      - Economics
-      - Federal Government
-      - GDP
-      - National Accounts
-      - Statistics
-    humanURL: https://www.bea.gov/resources/for-developers
-    baseURL: https://apps.bea.gov/api/data
-    properties:
-      - url: https://www.bea.gov/resources/for-developers
-        type: Documentation
-      - url: https://apps.bea.gov/api/signup/
-        type: Signup
-      - url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
-        type: GettingStarted
-      - url: https://apps.bea.gov/API/docs/index.htm
-        type: OpenAPI
-      - url: >-
-          https://raw.githubusercontent.com/api-evangelist/the-bureau-of-economic-analysis/refs/heads/main/openapi/the-bureau-of-economic-analysis-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics.
-      Methods include retrieving statistical data and metadata from datasets covering National Income and Product
-      Accounts (NIPA), GDP by Industry, Regional economic data by state and metro area, International Transactions
-      Accounts (ITA), International Investment Position (IIP), Fixed Assets, Input-Output tables, Multinational
-      Enterprises (MNE), and International Services Trade. Data is available in JSON or XML formats and requires a free
-      API key.
-    contact:
-      - FN: BEA Developer Support
-        url: https://www.bea.gov/resources/for-developers
-        email: BEA.Data.API@bea.gov
-    features:
-      - Dataset Discovery
-      - Parameter Discovery
-      - NIPA Tables
-      - GDP Data
-      - Regional Economic Data
-      - International Transactions
-      - Fixed Assets
-      - Input-Output Tables
-      - Multinational Enterprise Data
-      - JSON and XML Response Formats
-    useCases:
-      - Economic Research and Analysis
-      - GDP Monitoring and Reporting
-      - Regional Economic Development Planning
-      - Trade Balance Analysis
-      - Business Intelligence and Forecasting
-      - Academic Research
-      - Government Policy Analysis
-    integrations:
-      - url: https://github.com/us-bea/beaapi
-        name: BEA Python Library
-        type: SDKs
-      - url: https://github.com/us-bea/bea.R
-        name: BEA R Library
-        type: SDKs
+- aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis-industry-api
+  name: The Bureau of Economic Analysis Industry API
+  description: GDP by industry, input-output accounts, and sector-level data.
+  humanURL: https://www.bea.gov/resources/for-developers
+  baseURL: https://apps.bea.gov/api/data
+  tags:
+  - Industry
+  properties:
+  - type: OpenAPI
+    url: openapi/the-bureau-of-economic-analysis-industry-api-openapi.yml
+  - type: Documentation
+    url: https://www.bea.gov/resources/for-developers
+  - type: Signup
+    url: https://apps.bea.gov/api/signup/
+  - type: GettingStarted
+    url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
+- aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis-international-api
+  name: The Bureau of Economic Analysis International API
+  description: International transactions, investment position, and multinational enterprise data.
+  humanURL: https://www.bea.gov/resources/for-developers
+  baseURL: https://apps.bea.gov/api/data
+  tags:
+  - International
+  properties:
+  - type: OpenAPI
+    url: openapi/the-bureau-of-economic-analysis-international-api-openapi.yml
+  - type: Documentation
+    url: https://www.bea.gov/resources/for-developers
+  - type: Signup
+    url: https://apps.bea.gov/api/signup/
+  - type: GettingStarted
+    url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
+- aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis-metadata-api
+  name: The Bureau of Economic Analysis Metadata API
+  description: Methods for discovering available datasets, parameters, and valid values.
+  humanURL: https://www.bea.gov/resources/for-developers
+  baseURL: https://apps.bea.gov/api/data
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/the-bureau-of-economic-analysis-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://www.bea.gov/resources/for-developers
+  - type: Signup
+    url: https://apps.bea.gov/api/signup/
+  - type: GettingStarted
+    url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
+- aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis-national-accounts-api
+  name: The Bureau of Economic Analysis National Accounts API
+  description: >-
+    National Income and Product Accounts, Fixed Assets, and related national economic statistics.
+  humanURL: https://www.bea.gov/resources/for-developers
+  baseURL: https://apps.bea.gov/api/data
+  tags:
+  - National Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/the-bureau-of-economic-analysis-national-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.bea.gov/resources/for-developers
+  - type: Signup
+    url: https://apps.bea.gov/api/signup/
+  - type: GettingStarted
+    url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
+- aid: the-bureau-of-economic-analysis:the-bureau-of-economic-analysis-regional-api
+  name: The Bureau of Economic Analysis Regional API
+  description: State, metropolitan area, and county level economic data.
+  humanURL: https://www.bea.gov/resources/for-developers
+  baseURL: https://apps.bea.gov/api/data
+  tags:
+  - Regional
+  properties:
+  - type: OpenAPI
+    url: openapi/the-bureau-of-economic-analysis-regional-api-openapi.yml
+  - type: Documentation
+    url: https://www.bea.gov/resources/for-developers
+  - type: Signup
+    url: https://apps.bea.gov/api/signup/
+  - type: GettingStarted
+    url: https://apps.bea.gov/api/_pdf/bea_web_service_api_user_guide.pdf
 name: The Bureau of Economic Analysis
 tags:
   - Economics
@@ -69,7 +91,20 @@ tags:
   - Open Data
   - Statistics
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/the-bureau-of-economic-analysis.png
 access: 3rd-Party
 created: '2024-11-14'
 modified: '2026-05-19'
