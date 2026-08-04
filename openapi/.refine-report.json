@@ -1,0 +1,22 @@
+{
+  "provider": "the-bureau-of-economic-analysis",
+  "sources": [
+    "the-bureau-of-economic-analysis-industry-api-openapi.yml",
+    "the-bureau-of-economic-analysis-international-api-openapi.yml",
+    "the-bureau-of-economic-analysis-metadata-api-openapi.yml",
+    "the-bureau-of-economic-analysis-national-accounts-api-openapi.yml",
+    "the-bureau-of-economic-analysis-regional-api-openapi.yml"
+  ],
+  "outputs": [
+    "the-bureau-of-economic-analysis-industry-api-openapi.yml",
+    "the-bureau-of-economic-analysis-international-api-openapi.yml",
+    "the-bureau-of-economic-analysis-metadata-api-openapi.yml",
+    "the-bureau-of-economic-analysis-national-accounts-api-openapi.yml",
+    "the-bureau-of-economic-analysis-regional-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
