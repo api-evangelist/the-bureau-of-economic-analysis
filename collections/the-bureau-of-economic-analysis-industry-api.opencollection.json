@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bureau of Economic Analysis Industry API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "UserID",
+      "value": "{{UserID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Industry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get GDP by Industry Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/gdp-by-industry-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "GDPbyIndustry",
+                "type": "query"
+              },
+              {
+                "name": "TableID",
+                "value": "1",
+                "type": "query",
+                "description": "Table identifier within GDPbyIndustry dataset."
+              },
+              {
+                "name": "Frequency",
+                "value": "A",
+                "type": "query"
+              },
+              {
+                "name": "Year",
+                "value": "2023",
+                "type": "query"
+              },
+              {
+                "name": "Industry",
+                "value": "ALL",
+                "type": "query",
+                "description": "Industry code. Use 'ALL' for all industries."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves GDP-by-industry data, including value added, gross output, and intermediate inputs by industry sector (NAICS-based)."
+        },
+        {
+          "info": {
+            "name": "Get Input-Output Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/input-output-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "InputOutput",
+                "type": "query"
+              },
+              {
+                "name": "TableID",
+                "value": "56",
+                "type": "query",
+                "description": "Input-Output table identifier."
+              },
+              {
+                "name": "Year",
+                "value": "2022",
+                "type": "query"
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the Input-Output dataset covering supply and use tables, requirements tables, and make and use tables for the U.S. economy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

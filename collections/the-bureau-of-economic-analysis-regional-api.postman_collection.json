@@ -1,0 +1,204 @@
+{
+  "item": [
+    {
+      "id": "dfb12807-c5b2-433f-97bb-d757ed960455",
+      "name": "Regional",
+      "description": {
+        "content": "State, metropolitan area, and county level economic data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87907e1f-6d39-4a57-be4e-302298718016",
+          "name": "Get Regional Data",
+          "request": {
+            "name": "Get Regional Data",
+            "description": {
+              "content": "Retrieves state and local area economic data from the Regional dataset. Includes GDP by state, personal income, and employment data at the state, metropolitan statistical area (MSA), and county level.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "regional-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "TableName",
+                  "value": "<string>",
+                  "description": "(Required) Regional table code (e.g., SQGDP1 for Quarterly GDP by State)."
+                },
+                {
+                  "disabled": false,
+                  "key": "LineCode",
+                  "value": "<integer>",
+                  "description": "(Required) Line code within the regional table."
+                },
+                {
+                  "disabled": false,
+                  "key": "GeoFips",
+                  "value": "<string>",
+                  "description": "(Required) Geographic FIPS code. Use 'STATE' for all states, '00000' for US total."
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) Year(s) for data retrieval. Use 'LAST5' for last 5 years."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bc206cf-b103-4de3-b5b8-5bc9d8c2c4c2",
+              "name": "Regional economic data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "regional-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "Regional"
+                    },
+                    {
+                      "key": "TableName",
+                      "value": "SQGDP1"
+                    },
+                    {
+                      "key": "LineCode",
+                      "value": "1"
+                    },
+                    {
+                      "key": "GeoFips",
+                      "value": "STATE"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2023,2024"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"2010-09-03T22:26:37.741Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apps.bea.gov/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "UserID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3737768-291c-40df-b2fc-3d65f8742479",
+    "name": "Bureau of Economic Analysis Industry Regional API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.\n\nContact Support:\n Name: Bureau of Economic Analysis Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

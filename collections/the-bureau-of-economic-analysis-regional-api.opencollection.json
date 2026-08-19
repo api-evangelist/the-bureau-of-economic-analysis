@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bureau of Economic Analysis Industry Regional API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "UserID",
+      "value": "{{UserID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regional",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Regional Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/regional-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "Regional",
+                "type": "query"
+              },
+              {
+                "name": "TableName",
+                "value": "SQGDP1",
+                "type": "query",
+                "description": "Regional table code (e.g., SQGDP1 for Quarterly GDP by State)."
+              },
+              {
+                "name": "LineCode",
+                "value": "1",
+                "type": "query",
+                "description": "Line code within the regional table."
+              },
+              {
+                "name": "GeoFips",
+                "value": "STATE",
+                "type": "query",
+                "description": "Geographic FIPS code. Use 'STATE' for all states, '00000' for US total."
+              },
+              {
+                "name": "Year",
+                "value": "2023,2024",
+                "type": "query",
+                "description": "Year(s) for data retrieval. Use 'LAST5' for last 5 years."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves state and local area economic data from the Regional dataset. Includes GDP by state, personal income, and employment data at the state, metropolitan statistical area (MSA), and county level."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

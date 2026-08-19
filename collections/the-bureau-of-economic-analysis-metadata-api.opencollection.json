@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bureau of Economic Analysis Industry Metadata API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "UserID",
+      "value": "{{UserID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Dataset List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query",
+                "description": "Your registered BEA API key (36-character UUID)."
+              },
+              {
+                "name": "method",
+                "value": "GetDatasetList",
+                "type": "query",
+                "description": "API method to invoke."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query",
+                "description": "Format for the response data."
+              }
+            ]
+          },
+          "docs": "Returns a list of all available BEA datasets with descriptions."
+        },
+        {
+          "info": {
+            "name": "Get Parameter List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/parameters",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query",
+                "description": "Your registered BEA API key."
+              },
+              {
+                "name": "method",
+                "value": "GetParameterList",
+                "type": "query",
+                "description": "API method to invoke."
+              },
+              {
+                "name": "DatasetName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the dataset for which to retrieve parameters."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of the parameters (required and optional) for a particular dataset."
+        },
+        {
+          "info": {
+            "name": "Get Parameter Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/parameter-values",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetParameterValues",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ParameterName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the parameter for which to retrieve valid values."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of valid values for a specified parameter within a dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

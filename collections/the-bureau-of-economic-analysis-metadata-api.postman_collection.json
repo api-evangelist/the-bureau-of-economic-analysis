@@ -1,0 +1,447 @@
+{
+  "item": [
+    {
+      "id": "1af11ff5-0e8a-44ee-989e-9b6babfa68fd",
+      "name": "Metadata",
+      "description": {
+        "content": "Methods for discovering available datasets, parameters, and valid values.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed1f2ba4-0ad4-44b6-afba-7efcf298c812",
+          "name": "Get Dataset List",
+          "request": {
+            "name": "Get Dataset List",
+            "description": {
+              "content": "Returns a list of all available BEA datasets with descriptions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) Your registered BEA API key (36-character UUID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) API method to invoke."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON",
+                  "description": "Format for the response data."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0fcb8d6b-e8c7-42c6-b61f-b81f77a5b97e",
+              "name": "List of available BEA datasets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetDatasetList"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Dataset\": [\n        {\n          \"DatasetName\": \"string\",\n          \"DatasetDescription\": \"string\"\n        },\n        {\n          \"DatasetName\": \"string\",\n          \"DatasetDescription\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48c5c901-213f-4733-85f2-48fd43cdcd8c",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetDatasetList"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Error\": {\n        \"APIErrorCode\": \"string\",\n        \"APIErrorDescription\": \"string\",\n        \"ErrorDetail\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dc74901-ace5-45ec-ada1-1f86ea110d93",
+          "name": "Get Parameter List",
+          "request": {
+            "name": "Get Parameter List",
+            "description": {
+              "content": "Returns a list of the parameters (required and optional) for a particular dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parameters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) Your registered BEA API key."
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) API method to invoke."
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) Name of the dataset for which to retrieve parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84f79473-dd97-45a4-a26a-bf419e7f7af9",
+              "name": "List of parameters for the specified dataset.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parameters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetParameterList"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Parameter\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterDataType\": \"string\",\n          \"ParameterDescription\": \"string\",\n          \"ParameterIsRequired\": \"1\",\n          \"ParameterDefaultValue\": \"string\",\n          \"MultipleAcceptedFlag\": \"1\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterDataType\": \"string\",\n          \"ParameterDescription\": \"string\",\n          \"ParameterIsRequired\": \"1\",\n          \"ParameterDefaultValue\": \"string\",\n          \"MultipleAcceptedFlag\": \"1\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a26ca1c-8401-40af-88a9-f2e661122d34",
+          "name": "Get Parameter Values",
+          "request": {
+            "name": "Get Parameter Values",
+            "description": {
+              "content": "Returns a list of valid values for a specified parameter within a dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "parameter-values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ParameterName",
+                  "value": "<string>",
+                  "description": "(Required) Name of the parameter for which to retrieve valid values."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "086aba7d-2f49-4a08-ac3a-9c97b7d9e110",
+              "name": "Valid values for the specified parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "parameter-values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetParameterValues"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ParameterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"ParamValue\": [\n        {\n          \"Key\": \"string\",\n          \"Desc\": \"string\"\n        },\n        {\n          \"Key\": \"string\",\n          \"Desc\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apps.bea.gov/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "UserID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "049eaeab-d3aa-4057-912b-4db3c6a4b95a",
+    "name": "Bureau of Economic Analysis Industry Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.\n\nContact Support:\n Name: Bureau of Economic Analysis Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

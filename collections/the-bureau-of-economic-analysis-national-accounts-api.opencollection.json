@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bureau of Economic Analysis Industry National Accounts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "UserID",
+      "value": "{{UserID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "National Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get NIPA Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/nipa-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "NIPA",
+                "type": "query"
+              },
+              {
+                "name": "TableName",
+                "value": "T10101",
+                "type": "query",
+                "description": "NIPA table name (e.g., T10101 for GDP)."
+              },
+              {
+                "name": "Frequency",
+                "value": "Q",
+                "type": "query",
+                "description": "Data frequency."
+              },
+              {
+                "name": "Year",
+                "value": "2023,2024",
+                "type": "query",
+                "description": "Year(s) for data retrieval. Use 'X' for all years."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the National Income and Product Accounts (NIPA) dataset. NIPA tables cover GDP, personal income, consumer spending, corporate profits, and other national economic aggregates."
+        },
+        {
+          "info": {
+            "name": "Get Fixed Assets Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/fixed-assets-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "FixedAssets",
+                "type": "query"
+              },
+              {
+                "name": "TableName",
+                "value": "FAAt101",
+                "type": "query",
+                "description": "Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock)."
+              },
+              {
+                "name": "Year",
+                "value": "2022,2023",
+                "type": "query"
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the Fixed Assets dataset covering net stock of fixed assets, depreciation, investment, and related measures for private and government fixed assets in the United States."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

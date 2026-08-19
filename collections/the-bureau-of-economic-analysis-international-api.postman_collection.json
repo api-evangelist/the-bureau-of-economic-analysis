@@ -1,0 +1,359 @@
+{
+  "item": [
+    {
+      "id": "ff0286b7-dfd0-4b0b-8f63-508576fd1df8",
+      "name": "International",
+      "description": {
+        "content": "International transactions, investment position, and multinational enterprise data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb531727-a479-4e08-bdfa-f240b16133b6",
+          "name": "Get International Transactions Data",
+          "request": {
+            "name": "Get International Transactions Data",
+            "description": {
+              "content": "Retrieves data from the International Transactions Accounts (ITA) dataset. Covers U.S. current account, capital account, and financial account transactions with the rest of the world.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ita-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Indicator",
+                  "value": "<string>",
+                  "description": "(Required) ITA indicator code (e.g., BalGds for Balance on Goods)."
+                },
+                {
+                  "disabled": false,
+                  "key": "AreaOrCountry",
+                  "value": "<string>",
+                  "description": "(Required) Country or area code. Use 'AllCountries' for all."
+                },
+                {
+                  "disabled": false,
+                  "key": "Frequency",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebb447e3-f9d5-49e2-8f00-ea066e4110a7",
+              "name": "International transactions data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ita-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "ITA"
+                    },
+                    {
+                      "key": "Indicator",
+                      "value": "BalGds"
+                    },
+                    {
+                      "key": "AreaOrCountry",
+                      "value": "AllCountries"
+                    },
+                    {
+                      "key": "Frequency",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2023"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"1999-02-16T10:50:48.482Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eea0829-f262-445f-9874-885c9369ed19",
+          "name": "Get Multinational Enterprises Data",
+          "request": {
+            "name": "Get Multinational Enterprises Data",
+            "description": {
+              "content": "Retrieves data on U.S. multinational enterprises (MNEs) and foreign multinational enterprises operating in the United States, including financial and operating data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mne-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DirectionOfInvestment",
+                  "value": "<string>",
+                  "description": "(Required) Direction of investment - outward (US parent) or inward (foreign parent)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ClassificationCode",
+                  "value": "<string>",
+                  "description": "(Required) Industry or country classification code."
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "SeriesID",
+                  "value": "<integer>",
+                  "description": "(Required) MNE series identifier for the measure requested."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ac64cc9-3d68-4bff-ad09-20ee9ae126c0",
+              "name": "Multinational enterprises data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mne-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "MNE"
+                    },
+                    {
+                      "key": "DirectionOfInvestment",
+                      "value": "outward"
+                    },
+                    {
+                      "key": "ClassificationCode",
+                      "value": "0"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "SeriesID",
+                      "value": "4"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"1980-07-13T10:01:23.960Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"1\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apps.bea.gov/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "UserID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a1ed0c7e-19e9-4934-8b9c-e5f2fab267a4",
+    "name": "Bureau of Economic Analysis Industry International API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.\n\nContact Support:\n Name: Bureau of Economic Analysis Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

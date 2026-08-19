@@ -1,0 +1,329 @@
+{
+  "item": [
+    {
+      "id": "1f17e66b-cf43-452a-86a9-b9db1b7c0277",
+      "name": "National Accounts",
+      "description": {
+        "content": "National Income and Product Accounts, Fixed Assets, and related national economic statistics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36ce6f93-d4ef-4a1c-b2fb-3abf8f4db60a",
+          "name": "Get NIPA Data",
+          "request": {
+            "name": "Get NIPA Data",
+            "description": {
+              "content": "Retrieves data from the National Income and Product Accounts (NIPA) dataset. NIPA tables cover GDP, personal income, consumer spending, corporate profits, and other national economic aggregates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "nipa-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "TableName",
+                  "value": "<string>",
+                  "description": "(Required) NIPA table name (e.g., T10101 for GDP)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Frequency",
+                  "value": "<string>",
+                  "description": "(Required) Data frequency."
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) Year(s) for data retrieval. Use 'X' for all years."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9495d93b-6520-4d15-9dff-5fc490abda3d",
+              "name": "NIPA economic data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nipa-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "NIPA"
+                    },
+                    {
+                      "key": "TableName",
+                      "value": "T10101"
+                    },
+                    {
+                      "key": "Frequency",
+                      "value": "Q"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2023,2024"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"1972-09-24T11:01:48.379Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"1\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ed937bf-2c30-4b5e-ad63-4f64e305bfba",
+          "name": "Get Fixed Assets Data",
+          "request": {
+            "name": "Get Fixed Assets Data",
+            "description": {
+              "content": "Retrieves data from the Fixed Assets dataset covering net stock of fixed assets, depreciation, investment, and related measures for private and government fixed assets in the United States.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fixed-assets-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "TableName",
+                  "value": "<string>",
+                  "description": "(Required) Fixed assets table name (e.g., FAAt101 for Current-Cost Net Stock)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "feb90a43-280b-458c-b9f8-90ddeb4c13b5",
+              "name": "Fixed assets data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fixed-assets-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "FixedAssets"
+                    },
+                    {
+                      "key": "TableName",
+                      "value": "FAAt101"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2022,2023"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"2024-04-11T19:53:06.362Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"1\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"1\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apps.bea.gov/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "UserID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dedd0e75-2982-4e7d-8908-39a778ac1c5e",
+    "name": "Bureau of Economic Analysis Industry National Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.\n\nContact Support:\n Name: Bureau of Economic Analysis Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,339 @@
+{
+  "item": [
+    {
+      "id": "eb6a4644-9f25-4c19-8303-450c7fa86372",
+      "name": "Industry",
+      "description": {
+        "content": "GDP by industry, input-output accounts, and sector-level data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d1bc6f6-5c6b-4571-ba8c-7d1089363880",
+          "name": "Get GDP by Industry Data",
+          "request": {
+            "name": "Get GDP by Industry Data",
+            "description": {
+              "content": "Retrieves GDP-by-industry data, including value added, gross output, and intermediate inputs by industry sector (NAICS-based).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "gdp-by-industry-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "TableID",
+                  "value": "<integer>",
+                  "description": "(Required) Table identifier within GDPbyIndustry dataset."
+                },
+                {
+                  "disabled": false,
+                  "key": "Frequency",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Industry",
+                  "value": "<string>",
+                  "description": "(Required) Industry code. Use 'ALL' for all industries."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd21e74d-9b67-493a-a59a-26e890b19ff6",
+              "name": "GDP by industry data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "gdp-by-industry-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "GDPbyIndustry"
+                    },
+                    {
+                      "key": "TableID",
+                      "value": "1"
+                    },
+                    {
+                      "key": "Frequency",
+                      "value": "A"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2023"
+                    },
+                    {
+                      "key": "Industry",
+                      "value": "ALL"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"2016-06-03T11:33:20.755Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f35fc9a-68c4-4d12-abb5-4a5103449cab",
+          "name": "Get Input-Output Data",
+          "request": {
+            "name": "Get Input-Output Data",
+            "description": {
+              "content": "Retrieves data from the Input-Output dataset covering supply and use tables, requirements tables, and make and use tables for the U.S. economy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "input-output-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "UserID",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "DatasetName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "TableID",
+                  "value": "<integer>",
+                  "description": "(Required) Input-Output table identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "Year",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "JSON"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55d9c3a3-8b21-48e5-9971-5c81d041f1d9",
+              "name": "Input-output tables data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-output-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "UserID",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "GetData"
+                    },
+                    {
+                      "key": "DatasetName",
+                      "value": "InputOutput"
+                    },
+                    {
+                      "key": "TableID",
+                      "value": "56"
+                    },
+                    {
+                      "key": "Year",
+                      "value": "2022"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "JSON"
+                    },
+                    {
+                      "key": "UserID",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BEAAPI\": {\n    \"Request\": {\n      \"RequestParam\": [\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        },\n        {\n          \"ParameterName\": \"string\",\n          \"ParameterValue\": \"string\"\n        }\n      ]\n    },\n    \"Results\": {\n      \"Statistic\": \"string\",\n      \"UnitOfMeasure\": \"string\",\n      \"PublicTable\": \"string\",\n      \"UTCProductionTime\": \"2022-06-15T18:06:03.748Z\",\n      \"NoteRef\": \"string\",\n      \"Dimensions\": [\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        },\n        {\n          \"Name\": \"string\",\n          \"DataType\": \"string\",\n          \"IsValue\": \"0\"\n        }\n      ],\n      \"Data\": [\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        },\n        {\n          \"TableName\": \"string\",\n          \"SeriesCode\": \"string\",\n          \"LineNumber\": \"string\",\n          \"LineDescription\": \"string\",\n          \"TimePeriod\": \"string\",\n          \"CL_UNIT\": \"string\",\n          \"MULT\": \"string\",\n          \"DataValue\": \"string\",\n          \"NoteRef\": \"string\"\n        }\n      ],\n      \"Notes\": [\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        },\n        {\n          \"NoteRef\": \"string\",\n          \"NoteText\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apps.bea.gov/api/data",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "UserID"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f83ccbda-5443-45bc-b89d-fff737f52bdf",
+    "name": "Bureau of Economic Analysis Industry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.\n\nContact Support:\n Name: Bureau of Economic Analysis Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

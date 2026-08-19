@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Bureau of Economic Analysis Industry International API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "UserID",
+      "value": "{{UserID}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "International",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get International Transactions Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/ita-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "ITA",
+                "type": "query"
+              },
+              {
+                "name": "Indicator",
+                "value": "BalGds",
+                "type": "query",
+                "description": "ITA indicator code (e.g., BalGds for Balance on Goods)."
+              },
+              {
+                "name": "AreaOrCountry",
+                "value": "AllCountries",
+                "type": "query",
+                "description": "Country or area code. Use 'AllCountries' for all."
+              },
+              {
+                "name": "Frequency",
+                "value": "A",
+                "type": "query"
+              },
+              {
+                "name": "Year",
+                "value": "2023",
+                "type": "query"
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data from the International Transactions Accounts (ITA) dataset. Covers U.S. current account, capital account, and financial account transactions with the rest of the world."
+        },
+        {
+          "info": {
+            "name": "Get Multinational Enterprises Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apps.bea.gov/api/data/mne-data",
+            "params": [
+              {
+                "name": "UserID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "GetData",
+                "type": "query"
+              },
+              {
+                "name": "DatasetName",
+                "value": "MNE",
+                "type": "query"
+              },
+              {
+                "name": "DirectionOfInvestment",
+                "value": "outward",
+                "type": "query",
+                "description": "Direction of investment - outward (US parent) or inward (foreign parent)."
+              },
+              {
+                "name": "ClassificationCode",
+                "value": "0",
+                "type": "query",
+                "description": "Industry or country classification code."
+              },
+              {
+                "name": "Year",
+                "value": "2022",
+                "type": "query"
+              },
+              {
+                "name": "SeriesID",
+                "value": "4",
+                "type": "query",
+                "description": "MNE series identifier for the measure requested."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves data on U.S. multinational enterprises (MNEs) and foreign multinational enterprises operating in the United States, including financial and operating data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
