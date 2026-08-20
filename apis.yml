@@ -85,6 +85,13 @@ apis:
 name: The Bureau of Economic Analysis
 tags:
   - Economics
+  - Federal-Government
+  - GDP
+  - National Accounts
+  - Open Data
+  - Statistics
+tags_raw:
+  - Economics
   - Federal Government
   - GDP
   - National Accounts
