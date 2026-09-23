@@ -1,11 +1,7 @@
 {
   "provider": "the-bureau-of-economic-analysis",
   "sources": [
-    "the-bureau-of-economic-analysis-industry-api-openapi.yml",
-    "the-bureau-of-economic-analysis-international-api-openapi.yml",
-    "the-bureau-of-economic-analysis-metadata-api-openapi.yml",
-    "the-bureau-of-economic-analysis-national-accounts-api-openapi.yml",
-    "the-bureau-of-economic-analysis-regional-api-openapi.yml"
+    "_original/the-bureau-of-economic-analysis-openapi.yml"
   ],
   "outputs": [
     "the-bureau-of-economic-analysis-industry-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "the-bureau-of-economic-analysis-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "the-bureau-of-economic-analysis-industry-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "the-bureau-of-economic-analysis-international-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "the-bureau-of-economic-analysis-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "the-bureau-of-economic-analysis-national-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "the-bureau-of-economic-analysis-regional-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Bureau of Economic Analysis Industry Metadata API
-  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.
+  title: Bureau of Economic Analysis Metadata API
+  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures.
   version: 1.0.0
   contact:
     name: Bureau of Economic Analysis Developer Support
@@ -176,6 +176,70 @@ paths:
                 $ref: '#/components/schemas/ParameterValuesResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Error:
+                  type: object
+                  properties:
+                    APIErrorCode:
+                      type: string
+                    APIErrorDescription:
+                      type: string
+                    ErrorDetail:
+                      type: string
+    ParameterValuesResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                ParamValue:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      Key:
+                        type: string
+                        description: Valid value key for the parameter.
+                      Desc:
+                        type: string
+                        description: Description of the parameter value.
+    DatasetListResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Dataset:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      DatasetName:
+                        type: string
+                        description: Unique name of the dataset.
+                      DatasetDescription:
+                        type: string
+                        description: Human-readable description of the dataset.
     RequestInfo:
       type: object
       properties:
@@ -222,70 +286,6 @@ components:
                         enum:
                         - '0'
                         - '1'
-    ErrorResponse:
-      type: object
-      properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                Error:
-                  type: object
-                  properties:
-                    APIErrorCode:
-                      type: string
-                    APIErrorDescription:
-                      type: string
-                    ErrorDetail:
-                      type: string
-    DatasetListResponse:
-      type: object
-      properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                Dataset:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      DatasetName:
-                        type: string
-                        description: Unique name of the dataset.
-                      DatasetDescription:
-                        type: string
-                        description: Human-readable description of the dataset.
-    ParameterValuesResponse:
-      type: object
-      properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                ParamValue:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      Key:
-                        type: string
-                        description: Valid value key for the parameter.
-                      Desc:
-                        type: string
-                        description: Description of the parameter value.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

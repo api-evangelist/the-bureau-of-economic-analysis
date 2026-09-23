@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Bureau of Economic Analysis Industry National Accounts API
-  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures. The API includes methods for retrieving a subset of statistical data and the metadata that describes it. Available datasets include National Income and Product Accounts (NIPA), Multinational Enterprises (MNE), Fixed Assets, International Transactions Accounts (ITA), International Investment Position (IIP), Input-Output tables, Regional data, GDP by Industry, and more.
+  title: Bureau of Economic Analysis National Accounts API
+  description: The Bureau of Economic Analysis (BEA) Data API provides programmatic access to BEA published economic statistics using industry-standard methods and procedures.
   version: 1.0.0
   contact:
     name: Bureau of Economic Analysis Developer Support
@@ -150,33 +150,6 @@ paths:
                 $ref: '#/components/schemas/DataResponse'
 components:
   schemas:
-    Dimension:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: Name of the dimension (e.g., TableName, Frequency, Year, Line).
-        DataType:
-          type: string
-          description: Data type of the dimension values.
-        IsValue:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          description: Indicates if this dimension contains the actual data value.
-    RequestInfo:
-      type: object
-      properties:
-        RequestParam:
-          type: array
-          items:
-            type: object
-            properties:
-              ParameterName:
-                type: string
-              ParameterValue:
-                type: string
     DataPoint:
       type: object
       properties:
@@ -251,6 +224,33 @@ components:
                         type: string
                       NoteText:
                         type: string
+    Dimension:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Name of the dimension (e.g., TableName, Frequency, Year, Line).
+        DataType:
+          type: string
+          description: Data type of the dimension values.
+        IsValue:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: Indicates if this dimension contains the actual data value.
+    RequestInfo:
+      type: object
+      properties:
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
