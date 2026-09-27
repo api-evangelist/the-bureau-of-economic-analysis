@@ -184,6 +184,18 @@ components:
         NoteRef:
           type: string
           description: Reference to note, if applicable.
+    RequestInfo:
+      type: object
+      properties:
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
     DataResponse:
       type: object
       properties:
@@ -243,18 +255,6 @@ components:
           - '0'
           - '1'
           description: Indicates if this dimension contains the actual data value.
-    RequestInfo:
-      type: object
-      properties:
-        RequestParam:
-          type: array
-          items:
-            type: object
-            properties:
-              ParameterName:
-                type: string
-              ParameterValue:
-                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -176,26 +176,6 @@ paths:
                 $ref: '#/components/schemas/ParameterValuesResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                Error:
-                  type: object
-                  properties:
-                    APIErrorCode:
-                      type: string
-                    APIErrorDescription:
-                      type: string
-                    ErrorDetail:
-                      type: string
     ParameterValuesResponse:
       type: object
       properties:
@@ -218,28 +198,6 @@ components:
                       Desc:
                         type: string
                         description: Description of the parameter value.
-    DatasetListResponse:
-      type: object
-      properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                Dataset:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      DatasetName:
-                        type: string
-                        description: Unique name of the dataset.
-                      DatasetDescription:
-                        type: string
-                        description: Human-readable description of the dataset.
     RequestInfo:
       type: object
       properties:
@@ -286,6 +244,48 @@ components:
                         enum:
                         - '0'
                         - '1'
+    DatasetListResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Dataset:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      DatasetName:
+                        type: string
+                        description: Unique name of the dataset.
+                      DatasetDescription:
+                        type: string
+                        description: Human-readable description of the dataset.
+    ErrorResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Error:
+                  type: object
+                  properties:
+                    APIErrorCode:
+                      type: string
+                    APIErrorDescription:
+                      type: string
+                    ErrorDetail:
+                      type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
