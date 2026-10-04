@@ -176,28 +176,18 @@ paths:
                 $ref: '#/components/schemas/ParameterValuesResponse'
 components:
   schemas:
-    DatasetListResponse:
+    RequestInfo:
       type: object
       properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                Dataset:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      DatasetName:
-                        type: string
-                        description: Unique name of the dataset.
-                      DatasetDescription:
-                        type: string
-                        description: Human-readable description of the dataset.
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
     ParameterValuesResponse:
       type: object
       properties:
@@ -274,18 +264,28 @@ components:
                         enum:
                         - '0'
                         - '1'
-    RequestInfo:
+    DatasetListResponse:
       type: object
       properties:
-        RequestParam:
-          type: array
-          items:
-            type: object
-            properties:
-              ParameterName:
-                type: string
-              ParameterValue:
-                type: string
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Dataset:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      DatasetName:
+                        type: string
+                        description: Unique name of the dataset.
+                      DatasetDescription:
+                        type: string
+                        description: Human-readable description of the dataset.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
