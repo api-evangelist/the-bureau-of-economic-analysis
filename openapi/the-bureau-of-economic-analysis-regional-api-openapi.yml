@@ -94,21 +94,6 @@ paths:
                 $ref: '#/components/schemas/DataResponse'
 components:
   schemas:
-    Dimension:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: Name of the dimension (e.g., TableName, Frequency, Year, Line).
-        DataType:
-          type: string
-          description: Data type of the dimension values.
-        IsValue:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          description: Indicates if this dimension contains the actual data value.
     DataPoint:
       type: object
       properties:
@@ -139,6 +124,21 @@ components:
         NoteRef:
           type: string
           description: Reference to note, if applicable.
+    Dimension:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Name of the dimension (e.g., TableName, Frequency, Year, Line).
+        DataType:
+          type: string
+          description: Data type of the dimension values.
+        IsValue:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: Indicates if this dimension contains the actual data value.
     RequestInfo:
       type: object
       properties:

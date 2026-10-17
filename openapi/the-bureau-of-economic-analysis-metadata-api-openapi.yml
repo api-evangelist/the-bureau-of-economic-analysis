@@ -176,18 +176,6 @@ paths:
                 $ref: '#/components/schemas/ParameterValuesResponse'
 components:
   schemas:
-    RequestInfo:
-      type: object
-      properties:
-        RequestParam:
-          type: array
-          items:
-            type: object
-            properties:
-              ParameterName:
-                type: string
-              ParameterValue:
-                type: string
     ParameterValuesResponse:
       type: object
       properties:
@@ -210,26 +198,6 @@ components:
                       Desc:
                         type: string
                         description: Description of the parameter value.
-    ErrorResponse:
-      type: object
-      properties:
-        BEAAPI:
-          type: object
-          properties:
-            Request:
-              $ref: '#/components/schemas/RequestInfo'
-            Results:
-              type: object
-              properties:
-                Error:
-                  type: object
-                  properties:
-                    APIErrorCode:
-                      type: string
-                    APIErrorDescription:
-                      type: string
-                    ErrorDetail:
-                      type: string
     ParameterListResponse:
       type: object
       properties:
@@ -264,6 +232,26 @@ components:
                         enum:
                         - '0'
                         - '1'
+    ErrorResponse:
+      type: object
+      properties:
+        BEAAPI:
+          type: object
+          properties:
+            Request:
+              $ref: '#/components/schemas/RequestInfo'
+            Results:
+              type: object
+              properties:
+                Error:
+                  type: object
+                  properties:
+                    APIErrorCode:
+                      type: string
+                    APIErrorDescription:
+                      type: string
+                    ErrorDetail:
+                      type: string
     DatasetListResponse:
       type: object
       properties:
@@ -286,6 +274,18 @@ components:
                       DatasetDescription:
                         type: string
                         description: Human-readable description of the dataset.
+    RequestInfo:
+      type: object
+      properties:
+        RequestParam:
+          type: array
+          items:
+            type: object
+            properties:
+              ParameterName:
+                type: string
+              ParameterValue:
+                type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
